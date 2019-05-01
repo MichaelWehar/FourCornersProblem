@@ -17,27 +17,36 @@ public class MatrixLibrary {
         return getRows(matrix) < 2 || getCols(matrix) < 2;
     }
     
-    public static boolean[][] transpose(boolean[][] matrix){
-        int rows = getRows(matrix);
-        int cols = getCols(matrix);
-        boolean[][] newMatrix = new boolean[cols][rows];
-        for(int i = 0; i < rows; i++) {
-            for(int j = 0; j < cols; j++) {
-                newMatrix[j][i] = matrix[i][j];
-            }
-        }
-        return newMatrix;
-    }
-    
     public static Map<Integer, List<Integer>> getAdjacencyList(boolean[][] matrix){
         int rows = getRows(matrix);
         int cols = getCols(matrix);
         Map<Integer, List<Integer>> adjList = new HashMap<>();
         for(int i = 0; i < rows; i++) {
             adjList.put(i, new ArrayList<Integer>());
+        }
+        for(int i = 0; i < rows; i++) {
             for(int j = 0; j < cols; j++) {
                 if(matrix[i][j]) {
                     adjList.get(i).add(j);
+                }
+            }
+        }
+        return adjList;
+    }
+    
+    // Tests have shown that it's quite a bit faster to compute the adjacency list of the transpose
+    // directly rather than computing the transpose matrix and then computing the adjacency list.
+    public static Map<Integer, List<Integer>> getAdjacencyListOfTranspose(boolean[][] matrix){
+        int rows = getRows(matrix);
+        int cols = getCols(matrix);
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
+        for(int j = 0; j < cols; j++) {
+            adjList.put(j, new ArrayList<Integer>());
+        }
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                if(matrix[i][j]) {
+                    adjList.get(j).add(i);
                 }
             }
         }

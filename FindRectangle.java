@@ -15,23 +15,21 @@ public class FindRectangle {
         if(MatrixLibrary.isTrivial(matrix)) {
             return false;
         }
-        
-        // Transpose the matrix if there are more columns than rows
-        boolean transposed = false;
-        if(MatrixLibrary.getCols(matrix) > MatrixLibrary.getRows(matrix)) {
+
+        // Construct adjacency list for matrix or transposed matrix if there are fewer rows than columns
+        boolean transposed;
+        Map<Integer, List<Integer>> adjList;
+        if(MatrixLibrary.getRows(matrix) >= MatrixLibrary.getCols(matrix)) {
+            transposed = false;
+            adjList = MatrixLibrary.getAdjacencyList(matrix);
+        }
+        else {
             transposed = true;
-            matrix = MatrixLibrary.transpose(matrix);
+            adjList = MatrixLibrary.getAdjacencyListOfTranspose(matrix);
         }
         
-        long startTime1 = System.currentTimeMillis();
-        // Convert to an adjacency list
-        Map<Integer, List<Integer>> adjList = MatrixLibrary.getAdjacencyList(matrix);
-        
-        long endTime1 = System.currentTimeMillis();
-        System.out.println("* EXECUTION TIME: " + (endTime1 - startTime1));
-        
         // Search for a rectangle whose corners are 1's
-        int rows = MatrixLibrary.getRows(matrix);
+        int rows = adjList.size();
         Map<List<Integer>, Integer> pairs = new HashMap<>();
         for(int i = 0; i < rows; i++) {
             List<Integer> values = adjList.get(i);
@@ -57,6 +55,7 @@ public class FindRectangle {
                 }
             }
         }
+        
         return false;
     }
     
