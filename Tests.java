@@ -7,25 +7,29 @@ public class Tests {
     }
 
     public static void test1() {
+        System.out.println("##### TEST 1 STARTED #####");
         final int iterations = 1000;
         for (int i = 0; i < iterations; i++) {
             // Create random matrix
             boolean[][] matrix = MatrixLibrary.createRandomMatrix(10, 10, 0.835);
-            
+
             // Search for rectangle
-            if(FindRectangle.fastSearch(matrix) != FindRectangle.naiveSearch(matrix)) {
+            if (FindRectangle.fastSearch(matrix) != FindRectangle.naiveSearch(matrix)) {
                 // MatrixLibrary.printMatrix(matrix);
-                // System.out.println(FindRectangle.fastSearch(matrix) + ", " + FindRectangle.naiveSearch(matrix) + ", " + i);
-                System.out.println("TEST 1 FAILED");
+                // System.out.println(FindRectangle.fastSearch(matrix) + ", " +
+                // FindRectangle.naiveSearch(matrix) + ", " + i);
+                System.out.println("*** RESULTS DO NOT MATCH ***");
+                System.out.println("##### TEST 1 FINISHED #####");
                 return;
             }
         }
-        System.out.println("##### TEST 1 PASSED #####");
+        System.out.println("*** ALL RESULTS MATCH ***");
+        System.out.println("##### TEST 1 FINISHED #####");
     }
-    
+
     public static void test2() {
         System.out.println("##### TEST 2 STARTED #####");
-        
+
         // Create random matrix
         System.out.println("TASK 1");
         long startTime1 = System.currentTimeMillis();
@@ -35,21 +39,21 @@ public class Tests {
         // boolean[][] matrix = MatrixLibrary.createRandomMatrix(50, 5000000, 0.999);
         long endTime1 = System.currentTimeMillis();
         System.out.println("* EXECUTION TIME: " + (endTime1 - startTime1));
-        
+
         // Fast search
         System.out.println("TASK 2");
         long startTime2 = System.currentTimeMillis();
         System.out.println("* SEARCH RESULT: " + FindRectangle.fastSearch(matrix));
         long endTime2 = System.currentTimeMillis();
         System.out.println("* EXECUTION TIME: " + (endTime2 - startTime2));
-        
+
         // Naive search
         System.out.println("TASK 3");
         long startTime3 = System.currentTimeMillis();
         System.out.println("* SEARCH RESULT: " + FindRectangle.naiveSearch(matrix));
         long endTime3 = System.currentTimeMillis();
         System.out.println("* EXECUTION TIME: " + (endTime3 - startTime3));
-        
+
         System.out.println("##### TEST 2 FINISHED #####");
     }
 
