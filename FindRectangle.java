@@ -1,6 +1,6 @@
 
 // Author: Michael Wehar
-// Description: This class finds a rectangle whose corners are 1's in an m by n Boolean matrix in O(mn) time.
+// Description: This class finds a rectangle whose corners are 1's in an m by n Boolean matrix in O(m*n) time.
 // This algorithm is based on an approach from an upcoming paper to appear in CIAA 2019.
 // Reference: Two-dimensional Pattern Matching against Basic Picture Languages (F. Mráz, D. Prusa, and M. Wehar)
 
@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FindRectangle {
-
+    
+    // Runs in O(m*n) time
     public static boolean fastSearch(boolean[][] matrix) {
         // Check if the input is trivial
         if (MatrixLibrary.isTrivial(matrix)) {
@@ -58,6 +59,7 @@ public class FindRectangle {
         return false;
     }
 
+    // Runs in O(m^2*n^2) time
     public static boolean naiveSearch(boolean[][] matrix) {
         int rows = MatrixLibrary.getRows(matrix);
         int cols = MatrixLibrary.getCols(matrix);
