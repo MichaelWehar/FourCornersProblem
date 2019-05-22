@@ -1,5 +1,5 @@
 # Boolean Matrix Rectangle Problem
-Problem: Find a rectangle whose corners are 1's in a Boolean matrix
+Problem Statement: Find a rectangle whose corners are 1's in a Boolean matrix
 
 # Solutions
 - Java code by Michael Wehar
