@@ -1,7 +1,7 @@
 # Boolean Matrix Rectangle Problem
 **Problem Statement**
 
-Find a rectangle whose corners are 1's in a Boolean matrix.
+- Find a rectangle whose corners are 1's in a Boolean matrix.
 
 **Example Instance**
 
@@ -23,7 +23,7 @@ Cols 5 & 8
 
 # Runtime
 
-We provide an algorithm that runs in O(m * n) time on m by n matrices.
+- We provide an algorithm that runs in O(m * n) time on m by n matrices.
 
 # Code
 
