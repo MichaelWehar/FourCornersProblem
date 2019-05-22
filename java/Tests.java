@@ -1,13 +1,25 @@
 
 public class Tests {
 
-    public static void main(String[] args) {
-        test1();
-        test2();
-    }
-
     public static void test1() {
         System.out.println("##### TEST 1 STARTED #####");
+        // Create random matrix
+        boolean[][] matrix = MatrixLibrary.createRandomMatrix(10, 10, 0.835);
+
+        // Print matrix
+        MatrixLibrary.printMatrix(matrix);
+
+        // Search for rectangle
+        if (FindRectangle.fastSearch(matrix)) {
+            System.out.println("FOUND");
+        } else {
+            System.out.println("NOT FOUND");
+        }
+        System.out.println("##### TEST 1 FINISHED #####");
+    }
+
+    public static void test2() {
+        System.out.println("##### TEST 2 STARTED #####");
         final int iterations = 1000;
         for (int i = 0; i < iterations; i++) {
             // Create random matrix
@@ -19,16 +31,16 @@ public class Tests {
                 // System.out.println(FindRectangle.fastSearch(matrix) + ", " +
                 // FindRectangle.naiveSearch(matrix) + ", " + i);
                 System.out.println("*** RESULTS DO NOT MATCH ***");
-                System.out.println("##### TEST 1 FINISHED #####");
+                System.out.println("##### TEST 2 FINISHED #####");
                 return;
             }
         }
         System.out.println("*** ALL RESULTS MATCH ***");
-        System.out.println("##### TEST 1 FINISHED #####");
+        System.out.println("##### TEST 2 FINISHED #####");
     }
 
-    public static void test2() {
-        System.out.println("##### TEST 2 STARTED #####");
+    public static void test3() {
+        System.out.println("##### TEST 3 STARTED #####");
 
         // Create random matrix
         System.out.println("TASK 1");
@@ -54,7 +66,7 @@ public class Tests {
         long endTime3 = System.currentTimeMillis();
         System.out.println("* EXECUTION TIME: " + (endTime3 - startTime3));
 
-        System.out.println("##### TEST 2 FINISHED #####");
+        System.out.println("##### TEST 3 FINISHED #####");
     }
 
 }

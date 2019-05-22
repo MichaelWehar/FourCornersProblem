@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FindRectangle {
-    
+
     // Runs in O(m*n) time
     public static boolean fastSearch(boolean[][] matrix) {
         // Check if the input is trivial
@@ -41,11 +41,11 @@ public class FindRectangle {
                     if (pairs.containsKey(pair)) {
                         // ##### START DEBUGGING #####
                         if (transposed) {
-                            System.out.println("Rows: " + values.get(j) + ", " + values.get(k));
-                            System.out.println("Colums: " + pairs.get(pair) + ", " + i);
+                            System.out.println("ROWS: " + values.get(j) + ", " + values.get(k));
+                            System.out.println("COLS: " + pairs.get(pair) + ", " + i);
                         } else {
-                            System.out.println("Rows: " + pairs.get(pair) + ", " + i);
-                            System.out.println("Colums: " + values.get(j) + ", " + values.get(k));
+                            System.out.println("ROWS: " + pairs.get(pair) + ", " + i);
+                            System.out.println("COLS: " + values.get(j) + ", " + values.get(k));
                         }
                         // ##### END DEBUGGING #####
                         return true;
