@@ -21,9 +21,14 @@ Rows 2 & 4
 
 Cols 5 & 8
 
+# Runtime
+
+We provide an algorithm that runs in O(m * n) time on m by n matrices.
 
 # Code
+
 - Java code by Michael Wehar
+
 - Python code by Joseph Swernofsky
 
 # License
