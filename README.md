@@ -1,7 +1,9 @@
 # Boolean Matrix Rectangle Problem
-*Problem Statement:* Find a rectangle whose corners are 1's in a Boolean matrix
+**Problem Statement**
 
-*Example Instance:*
+Find a rectangle whose corners are 1's in a Boolean matrix.
+
+**Example Instance**
 
 0	0	1	0	0	0	0	1
 
