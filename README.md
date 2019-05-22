@@ -15,9 +15,10 @@ Find a rectangle whose corners are 1's in a Boolean matrix.
 
 0	0	1	0	0	0	1	1
 
-**Solution**
+**Example Solution**
 
 Rows 2 & 4
+
 Cols 5 & 8
 
 
