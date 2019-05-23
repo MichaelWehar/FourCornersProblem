@@ -35,9 +35,8 @@ public class MatrixLibrary {
     }
 
     // Tests have shown that it's quite a bit faster to compute the adjacency list
-    // of the transpose
-    // directly rather than computing the transpose matrix and then computing the
-    // adjacency list.
+    // of the transpose directly rather than computing the transpose matrix and
+    // then computing the adjacency list.
     public static Map<Integer, List<Integer>> getAdjacencyListOfTranspose(boolean[][] matrix) {
         int rows = getRows(matrix);
         int cols = getCols(matrix);

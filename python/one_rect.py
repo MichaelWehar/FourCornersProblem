@@ -1,4 +1,7 @@
-# Created by Joseph Swernofsky
+# Code written by Joseph Swernofsky
+# Note: You may need to transpose the matrix if m > n
+# in order to have runtime O(m*n).
+
 m,n = map(int, input().split())
 matrix = [list(map(int, input())) for _ in range(m)]
 
