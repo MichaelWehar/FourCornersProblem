@@ -23,7 +23,7 @@ Cols 5 & 8
 
 # Runtime
 
-- We provide an algorithm that runs in O(m * n) time on m by n matrices.
+- We provide an algorithm that runs in O(m\*n) time on m by n matrices.  ([See short explanation](https://github.com/MichaelWehar/BooleanMatrixRectangleProblem/issues/2))
 
 # Code
 
