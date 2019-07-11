@@ -23,7 +23,7 @@ Cols 5 & 8
 
 # Our Algorithm
 
-*Informal Explanation:*
+**Informal Explanation:**
 
 Given an m by n Boolean matrix.
 
