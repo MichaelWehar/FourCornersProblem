@@ -35,7 +35,7 @@ Go through entries in the matrix row by row. For each row, add all pairs of colu
 
 If we attempt to add a pair to the set that is already in the set, then we've found a rectangle whose corners are 1's.
 
-If we reach the end, then we didn't find a rectangle whose corners are 1's.
+If we reach the end, then there is no rectangle whose corners are 1's.
 
 # Runtime
 
