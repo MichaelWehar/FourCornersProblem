@@ -23,7 +23,7 @@ public class Tests {
         final int iterations = 1000;
         for (int i = 0; i < iterations; i++) {
             // Create random matrix
-            boolean[][] matrix = MatrixLibrary.createRandomMatrix(10, 10, 0.835);
+            boolean[][] matrix = MatrixLibrary.createRandomMatrix(50, 50, 0.975);
 
             // Search for rectangle
             if (FindRectangle.fastSearch(matrix) != FindRectangle.naiveSearch(matrix)) {
@@ -34,6 +34,7 @@ public class Tests {
                 System.out.println("##### TEST 2 FINISHED #####");
                 return;
             }
+            // System.out.println(FindRectangle.fastSearch(matrix));
         }
         System.out.println("*** ALL RESULTS MATCH ***");
         System.out.println("##### TEST 2 FINISHED #####");
