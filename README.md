@@ -33,7 +33,7 @@ Next, create a set of pairs of column indexes. Initially, the set is empty.
 
 Go through entries in the matrix row by row. For each row, add all pairs of column indexes where there is a 1 to the set.
 
-**Note:** A common inefficiency is to traverse through every pair of column indexes from each row.  Instead, we convert the row into a set of column indexes where there is a 1 so that we can efficiently traverse through pairs of 1's (skiping any pairs with 0).
+**Note:** A common inefficiency is to traverse through every pair of column indexes from each row.  Instead, we convert the row into a set of all column indexes where there is a 1 so that we can efficiently traverse through pairs of 1's (skiping any pairs with 0).
 
 If we attempt to add a pair to the set that is already in the set, then we've found a rectangle whose corners are 1's.
 
