@@ -1,7 +1,7 @@
 # Boolean Matrix Rectangle Problem
 **Problem Statement**
 
-Find a rectangle whose corners are 1's in a given Boolean matrix.
+Find a rectangle whose four corners are 1's in a given Boolean matrix.
 
 *Note: This is sometimes referred to as a four corners problem.*
 
