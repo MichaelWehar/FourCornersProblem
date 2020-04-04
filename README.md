@@ -25,7 +25,7 @@ Cols 5 & 8
 
 # Our Algorithm
 
-**Informal Explanation:**
+**Informal Explanation**
 
 Given an m by n Boolean matrix.
 
@@ -41,7 +41,7 @@ If we attempt to add a pair to the set that is already in the set, then we've fo
 
 Otherwise, if we reach the end, then there is no rectangle whose corners are 1's.
 
-**Runtime:**
+**Runtime**
 
 This takes O(m\*n + n^2) time because we go through each of the m*n entries at most once and we go through each of the (n choose 2) = O(n^2) pairs of column indexes at most once before finding a rectangle whose corners are 1's.
 
@@ -59,13 +59,13 @@ Since n <= m, this takes O(m\*n) time.
 
 # Related Resources
 
-**Papers:**
+**Papers**
 
 - F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
 - D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020 (to appear).
 
-**Coding websites that mention this problem:**
+**Coding websites that mention this problem**
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
