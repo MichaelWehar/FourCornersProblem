@@ -35,7 +35,7 @@ Next, create a set of pairs of column indexes. Initially, the set is empty.
 
 Go through entries in the matrix row by row. For each row, add all pairs of column indexes where there is a 1 to the set.
 
-**Note:** A common inefficiency is to traverse through every pair of column indexes from each row.  Instead, we convert each row into a set containing all column indexes where there is a 1 so that we can efficiently traverse through pairs of 1's (skipping any pairs with 0).
+*Note: A common inefficiency is to traverse through every pair of column indexes from each row.  Instead, we convert each row into a set containing all column indexes where there is a 1 so that we can efficiently traverse through pairs of 1's (skipping any pairs with 0).*
 
 If we attempt to add a pair to the set that is already in the set, then we've found a rectangle whose corners are 1's.
 
@@ -59,13 +59,13 @@ Since n <= m, this takes O(m\*n) time.
 
 # Related Resources
 
-## Papers
+**Papers:**
 
 - F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
 - D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020 (to appear).
 
-## Coding websites that mention this problem
+**Coding websites that mention this problem:**
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
