@@ -3,6 +3,8 @@
 
 Find a rectangle whose corners are 1's in a Boolean matrix.
 
+*Note: This is sometimes referred to as a four corners problem.*
+
 **Example Instance**
 
 0	0	1	0	0	0	0	1
