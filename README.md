@@ -41,7 +41,7 @@ If we attempt to add a pair to the set that is already in the set, then we've fo
 
 Otherwise, if we reach the end, then there is no rectangle whose corners are 1's.
 
-# Runtime
+**Runtime:**
 
 This takes O(m\*n + n^2) time because we go through each of the m*n entries at most once and we go through each of the (n choose 2) = O(n^2) pairs of column indexes at most once before finding a rectangle whose corners are 1's.
 
