@@ -1,7 +1,7 @@
 # Boolean Matrix Rectangle Problem
 **Problem Statement**
 
-Find a rectangle whose corners are 1's in a Boolean matrix.
+Find a rectangle whose corners are 1's in a given Boolean matrix.
 
 *Note: This is sometimes referred to as a four corners problem.*
 
@@ -56,3 +56,19 @@ Since n <= m, this takes O(m\*n) time.
 
 # License
 - MIT
+
+# Related Resources
+
+## Papers
+
+- F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
+
+- D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020 (to appear).
+
+## Coding websites that mention this problem
+
+- https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
+
+- https://www.tutorialspoint.com/find-if-there-is-a-rectangle-in-binary-matrix-with-corners-as-1-in-cplusplus
+
+- https://www.interviewbit.com/problems/find-rectangle-in-binary-matrix/
