@@ -9,9 +9,9 @@
 # (b) When we encounter a one in the matrix we add its row
 # index to the set row_sets[col] where col is the current
 # column index.
-# (c) For each row, we build up a set union of row indexes
-# where there is a one in the same column as a one in the
-# current row.
+# (c) For each row, we build up a set named union of row
+# indexes where there is a one in the same column as a one
+# in the current row.
 # (d) If we ever have a non-empty intersection between
 # row_sets[col] and union, then we've found a 2x2 subrect.
 # This is because we have two ones in the current row that
