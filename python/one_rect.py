@@ -1,4 +1,5 @@
 # Code written by Joseph Swernofsky
+# Runtime explanation by Michael Wehar
 #
 # This approach is slightly different from the Java approach
 # that is described in the Readme.
