@@ -24,8 +24,8 @@
 # Note: You need to transpose the matrix if m > n so that the
 # runtime is O(m*n).
 
-m,n = map(int, input().split())
-matrix = [list(map(int, input())) for _ in range(m)]
+m, n = map(int, input().split())
+matrix = [list(map(int, input().split())) for _ in range(m)]
 
 print(matrix)
 
