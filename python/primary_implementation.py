@@ -1,61 +1,55 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May 21 11:11:10 2020
+# Created on Thu May 21 11:11:10 2020
+# Author: Ari Liloia
 
-@author: Ari Liloia
-"""
+# Helper functions
+def createEmptyArray(n):
+    return [False for _ in range(n)]
 
-
-
+def createEmptyMatrix(m, n):
+    return [createEmptyArray(n) for _ in range(m)]
 
 m = 5
 n = 5
 
+emptyMatrix = createEmptyMatrix(5, 5)
+testMatrix = emptyMatrix
+testMatrix[0][0] = True
+testMatrix[0][4] = True
+testMatrix[4][4] = True
+testMatrix[4][0] = True
 
-mtx_empty = [[False, False, False, False, False],
-             [False, False, False, False, False],
-             [False, False, False, False, False],
-             [False, False, False, False, False],
-             [False, False, False, False, False]]
+print(testMatrix)
+# bijection
+# 4 cols
+# (0,4): (0 * 4) + 4 = 4
+# (1,0): (1 * 4) + 0 = 4
+# this is prob why we start at an index 1 greater
+# but why is it working w this code
 
-test2 = mtx_empty 
-test2[0][0] = True
-test2[0][4] = True
-test2[4][1] = True
-test2[4][0] = True
-
-print(test2)
-#bijection
-#4 cols
-#(0,4): (0*4)+4 = 4
-#(1,0):     (1*4)+0 = 4
-#this is prob why we start at an index 1 greater
-#but why is it working w this code
-
-
-
-
-def rect_exists(matrix, m, n):
-    solnmtx = [False for _ in range(m*n)]
+def rectExists(matrix, m, n):
+    # This array will assign data to each pair of columns
+    columnPairs = createEmptyArray(n * n)
+    # Traverse through the matrix row by row
     for i in range(m):
-        oneRow= []
+        currentRow = []
+        # Traverse through current row's elements to find all 1's (or true entries)
         for j in range(n):
-            if(matrix[i][j]==True):
-                oneRow.append(j)
-        while(len(oneRow)>1):
-            oneElement = oneRow.pop(0)
-            for remaining in range(len(oneRow)):
-                print((oneElement*n)+oneRow[remaining])
-                if(solnmtx[(oneElement*n)+oneRow[remaining]] == True):
-                    #print(str(oneElement) + " " + str(oneRow[remaining]))
-                    
+            if(matrix[i][j] == True):
+                currentRow.append(j)
+        # Efficiently traverse through pairs of column indexes with 1's (or true entries)
+        while(len(currentRow) > 1):
+            # Pop removes the first element from a list
+            firstElement = currentRow.pop(0)
+            # Iterate through other entries containing 1 (or true)
+            # while checking if they have already been recorded
+            for nextIndex in range(len(currentRow)):
+                nextElement = currentRow[nextIndex]
+                # print((firstElement * n) + nextElement)
+                if(columnPairs[(firstElement * n) + nextElement] == True):
+                    # print(str(firstElement) + " " + str(nextElement))
                     return True
                 else:
-                    solnmtx[(oneElement*n)+oneRow[remaining]] = True
+                    columnPairs[(firstElement * n) + nextElement] = True
     return False
 
-print(rect_exists(test2,m,n))
-            
-    
-            
+print(rectExists(testMatrix, m, n))
