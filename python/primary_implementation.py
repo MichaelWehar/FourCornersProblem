@@ -51,9 +51,8 @@ def importMatrix(filename):
 m, n, testMatrix = importMatrix('test_matrices/testMatrix1')
 
 def rectExists(m, n, matrix):
-    # This array will assign data to each pair of columns
-    columnPairs = createEmptyArray((n * (n - 1)) / 2)
-    # Could do (n / 2) * (n - 1) to reduce chances of overflow
+    # This set will store pairs of column indexes
+    columnPairs = set()
     # Traverse through the matrix row by row
     for i in range(m):
         currentRow = []
@@ -66,15 +65,16 @@ def rectExists(m, n, matrix):
         for firstIndex in range(len(currentRow)):
             firstElement = currentRow[firstIndex]
             # Next, iterate over all possible next entries containing 1 (or true)
-            # while checking if they have already been recorded
             for nextIndex in range(firstIndex + 1, len(currentRow)):
                 nextElement = currentRow[nextIndex]
                 # print((firstElement * n) + nextElement)
-                if(columnPairs[(firstElement * n) + nextElement] == True):
+                # Encode a pair (firstElement, nextElement) as (firstElement * n) + nextElement
+                currentPair = (firstElement * n) + nextElement
+                if(currentPair in columnPairs):
                     # print(str(firstElement) + " " + str(nextElement))
                     return True
                 else:
-                    columnPairs[(firstElement * n) + nextElement] = True
+                    columnPairs.add(currentPair)
     return False
 
 print(rectExists(m, n, testMatrix))
