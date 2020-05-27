@@ -8,6 +8,7 @@ def createEmptyArray(n):
 def createEmptyMatrix(m, n):
     return [createEmptyArray(n) for _ in range(m)]
 
+# File IO
 def importMatrix(filename):
     #open files with the following convention:
     #first line: #rows (m), #columns (n)
@@ -51,7 +52,8 @@ m, n, testMatrix = importMatrix('test_matrices/testMatrix1')
 
 def rectExists(m, n, matrix):
     # This array will assign data to each pair of columns
-    columnPairs = createEmptyArray(n * n)
+    columnPairs = createEmptyArray((n * (n - 1)) / 2)
+    # Could do (n / 2) * (n - 1) to reduce chances of overflow
     # Traverse through the matrix row by row
     for i in range(m):
         currentRow = []
@@ -60,12 +62,12 @@ def rectExists(m, n, matrix):
             if(matrix[i][j] == True):
                 currentRow.append(j)
         # Efficiently traverse through pairs of column indexes with 1's (or true entries)
-        while(len(currentRow) > 1):
-            # Pop removes the first element from a list
-            firstElement = currentRow.pop(0)
-            # Iterate through other entries containing 1 (or true)
+        # First, iterate over all possible entries containing 1 (or true)
+        for firstIndex in range(len(currentRow)):
+            firstElement = currentRow[firstIndex]
+            # Next, iterate over all possible next entries containing 1 (or true)
             # while checking if they have already been recorded
-            for nextIndex in range(len(currentRow)):
+            for nextIndex in range(firstIndex + 1, len(currentRow)):
                 nextElement = currentRow[nextIndex]
                 # print((firstElement * n) + nextElement)
                 if(columnPairs[(firstElement * n) + nextElement] == True):
