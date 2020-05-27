@@ -3,7 +3,7 @@
 from matrix_reader import MatrixReader
 
 # Read in test matrix
-m, n, testMatrix = MatrixReader.read('test_matrices/testMatrix1')
+m, n, testMatrix = MatrixReader.read('test_matrices/testMatrix1.txt')
 
 # Algorithm implementation
 def rectExists(m, n, matrix):
