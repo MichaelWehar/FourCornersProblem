@@ -1,5 +1,8 @@
 # Created on Thu May 21 11:11:10 2020
 # Author: Ari Liloia
+import sys
+sys.path.insert(1, 'helper_functions')
+
 from matrix_reader import MatrixReader
 
 # Read in test matrix
