@@ -9,7 +9,7 @@ from matrix_reader import MatrixReader
 
 # Algorithm implementation
 def rectSize(m, n, matrix):
-    # This set will store pairs of column indexes
+    # This dictonary will map bijections (keys) to row indices (values)
     columnPairs = {}
     # Traverse through the matrix row by row
     for i in range(m):
@@ -29,10 +29,12 @@ def rectSize(m, n, matrix):
                 # Encode a pair (firstElement, nextElement) as (firstElement * n) + nextElement
                 currentPair = (firstElement * n) + nextElement
                 if(currentPair in columnPairs):
-
                     # print(str(firstElement) + " " + str(nextElement))
+                    #if the key corresponding to a bijection is already in the dictionary,
+                    #use the corresponding value and the current row index to get the height
+                    #of the submatrix
                     matrixHeight = i - (columnPairs.get(currentPair)) + 1
-                    matrixWidth = nextElement - firstElement + 1 
+                    matrixWidth = nextElement - firstElement + 1
                     return matrixHeight*matrixWidth
                 else:
                     columnPairs[currentPair] = i
@@ -44,5 +46,5 @@ print('--')
 for entry in os.listdir('test_matrices'):
     print(entry)
     m, n, testMatrix = MatrixReader.read('test_matrices/' + entry)
-    print('matrixSize ' + str(rectSize(m, n, testMatrix)))
+    print('matrixSize: ' + str(rectSize(m, n, testMatrix)))
     print('--')
