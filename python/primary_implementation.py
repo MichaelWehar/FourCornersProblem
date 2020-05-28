@@ -1,12 +1,11 @@
 # Created on Thu May 21 11:11:10 2020
 # Author: Ari Liloia
 import sys
+import os
 sys.path.insert(1, 'helper_functions')
 
 from matrix_reader import MatrixReader
 
-# Read in test matrix
-m, n, testMatrix = MatrixReader.read('test_matrices/testMatrix1.txt')
 
 # Algorithm implementation
 def rectExists(m, n, matrix):
@@ -36,4 +35,10 @@ def rectExists(m, n, matrix):
                     columnPairs.add(currentPair)
     return False
 
-print(rectExists(m, n, testMatrix))
+#Run all test cases in same file
+print('--')
+for entry in os.listdir('test_matrices'):
+    print(entry)
+    m, n, testMatrix = MatrixReader.read('test_matrices/' + entry)
+    print(rectExists(m, n, testMatrix))
+    print('--')
