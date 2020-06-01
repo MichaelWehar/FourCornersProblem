@@ -1,13 +1,6 @@
-# Created on Thu May 21 11:11:10 2020
-# Author: Ari Liloia
-import sys
-import os
-sys.path.insert(1, 'helper_functions')
+# Created on 5/21/20
+# Author: Ari Liloia and Michael Wehar
 
-from matrix_reader import MatrixReader
-
-
-# Algorithm implementation
 def rectExists(m, n, matrix):
     # This set will store pairs of column indexes
     columnPairs = set()
@@ -34,11 +27,3 @@ def rectExists(m, n, matrix):
                 else:
                     columnPairs.add(currentPair)
     return False
-
-#Run all test cases in same file
-print('--')
-for entry in os.listdir('test_matrices'):
-    print(entry)
-    m, n, testMatrix = MatrixReader.read('test_matrices/' + entry)
-    print(rectExists(m, n, testMatrix))
-    print('--')

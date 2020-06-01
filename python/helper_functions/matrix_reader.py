@@ -1,3 +1,6 @@
+# Created on 5/27/20
+# Author: Ari Liloia and Michael Wehar
+
 class MatrixReader:
     # Private helper method
     @staticmethod

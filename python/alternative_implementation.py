@@ -24,12 +24,7 @@
 # Note: You need to transpose the matrix if m > n so that the
 # runtime is O(m*n).
 
-m, n = map(int, input().split())
-matrix = [list(map(int, input().split())) for _ in range(m)]
-
-print(matrix)
-
-def subrect(matrix, m, n):
+def altRectExists(m, n, matrix):
     # Which rows touch this column
     row_sets = [set() for _ in range(n)]
 
@@ -45,5 +40,3 @@ def subrect(matrix, m, n):
                 union |= row_sets[col]
                 row_sets[col].add(row)
     return False
-
-print(subrect(matrix, m, n))
