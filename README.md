@@ -1,11 +1,10 @@
-# Boolean Matrix Rectangle Problem
+# The Four Corners Problem
+
 **Problem Statement**
 
 Input: A Boolean matrix M.
 
 Goal: Find a rectangle within M whose four corners are 1's.
-
-*Note: This is sometimes referred to as a four corners problem.*
 
 **Example Instance**
 
