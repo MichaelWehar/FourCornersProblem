@@ -1,7 +1,9 @@
 # Boolean Matrix Rectangle Problem
 **Problem Statement**
 
-Find a rectangle whose four corners are 1's in a given Boolean matrix.
+Input: A Boolean matrix M.
+
+Goal: Find a rectangle within M whose four corners are 1's.
 
 *Note: This is sometimes referred to as a four corners problem.*
 
@@ -49,12 +51,11 @@ Since n <= m, this takes O(m\*n) time.
 
 # Code
 
-- C++ code by Niteesh Kumar and Michael Wehar
+- C++ code by Niteesh Kumar and Michael Wehar.
 
-- Java code by Michael Wehar
-(based on **Two-dimensional Pattern Matching against Basic Picture Languages** by *F. Mráz, D. Prusa, and M. Wehar*)
+- Java code by Michael Wehar (based on papers [1] and [2]).
 
-- Python code by Joseph Swernofsky
+- Python code primary implementation by Ari Liloia and Michael Wehar (based on papers [1] and [2]).  Alternative implementation by Joseph Swernofsky.
 
 # License
 - MIT
@@ -63,9 +64,9 @@ Since n <= m, this takes O(m\*n) time.
 
 **Papers**
 
-- F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
+- [1] F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
-- D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
+- [2] D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
 **Coding websites that mention this problem**
 
