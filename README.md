@@ -49,6 +49,8 @@ Since n <= m, this takes O(m\*n) time.
 
 # Code
 
+- C++ code by Niteesh Kumar and Michael Wehar
+
 - Java code by Michael Wehar
 (based on **Two-dimensional Pattern Matching against Basic Picture Languages** by *F. Mráz, D. Prusa, and M. Wehar*)
 
@@ -63,7 +65,7 @@ Since n <= m, this takes O(m\*n) time.
 
 - F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
-- D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020 (to appear).
+- D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
 **Coding websites that mention this problem**
 
