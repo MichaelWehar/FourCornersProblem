@@ -4,7 +4,7 @@
 
 Input: A Boolean matrix M.
 
-Goal: Find a rectangle within M whose four corners are 1's.
+Decision Question: Does there exist a rectangle within M whose four corners are 1's?
 
 **Example Instance**
 
