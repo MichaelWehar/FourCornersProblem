@@ -1,6 +1,6 @@
 # The Four Corners Problem
 
-The *four corners problem* is decidable with its currectly best runtime known is $O(n\*m)$.
+The *four corners problem* is decidable with its currectly best runtime known $O(n\*m)$.
 
 ## Problem Statement
 
@@ -12,13 +12,13 @@ Answer: yes / no
 
 **Example Instance**: 5x8 matrix
 
-|     | c1  | c2  | c3  | c4  | c5    | c6  | c7  | c8    |
-| --- | --- | --- | --- | --- | ---   | --- | --- | ---   |
-| r1  | 0   | 0   | 1   | 0   | 0     | 0   | 0   | 1     |
-| r2  | 1   | 0   | 0   | 0   | **1** | 1   | 0   | **1** |
-| r3  | 0   | 0   | 1   | 0   | 0     | 1   | 0   | 0     |
-| r4  | 0   | 0   | 0   | 0   | **1** | 0   | 1   | **1** |
-| r5  | 0   | 0   | 1   | 0   | 0     | 0   | 1   | 1     |
+|          | *c1* | *c2* | *c3* | *c4* | *c5*  | *c6* | *c7* | *c8*  |
+| ---      | ---  | ---  | ---  | ---  | ---   | ---  | ---  | ---   |
+| ***r1*** | 0    | 0    | 1    | 0    | 0     | 0    | 0    | 1     |
+| ***r2*** | 1    | 0    | 0    | 0    | **1** | 1    | 0    | **1** |
+| ***r3*** | 0    | 0    | 1    | 0    | 0     | 1    | 0    | 0     |
+| ***r4*** | 0    | 0    | 0    | 0    | **1** | 0    | 1    | **1** |
+| ***r5*** | 0    | 0    | 1    | 0    | 0     | 0    | 1    | 1     |
 
 **Example Solution**
 
