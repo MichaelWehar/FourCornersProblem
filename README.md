@@ -1,10 +1,14 @@
 # The Four Corners Problem
 
-**Problem Statement**
+The *four corners problem* is decidable with its currectly best runtime known is $O(n\*m)$.
+
+## Problem Statement
 
 Input: A Boolean matrix M.
 
-Question: Does there exist a rectangle within M whose four corners are 1's?
+[Decision Problem](https://en.wikipedia.org/wiki/Decision_problem): Does there exist a rectangle within M whose four corners are 1's?
+
+Answer: yes / no
 
 **Example Instance**
 
@@ -57,17 +61,18 @@ Since n <= m, this takes O(m\*n) time.
 - Python code primary implementation by Ari Liloia and Michael Wehar (based on papers [1] and [2]).  Alternative implementation by Joseph Swernofsky.
 
 # License
+
 - MIT
 
 # Related Resources
 
-**Papers**
+## Papers
 
 - [1] F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
 - [2] D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
-**Coding websites that mention this problem**
+## Coding websites that mention this problem
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
