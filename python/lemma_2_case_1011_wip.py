@@ -6,30 +6,53 @@ def lemma2Exists(m, n, matrix):
 
     # Map any location of a 1 such as (i, j) to the next location of a 1
     # to the right or down
-    nextOneRight = []
-    nextOneDown = []
+
+
+    #need to initialize these arrays, otherwise
+    #we get "list assignment index out of range" error -Ari
+
+    nextOneRight = [-1 for _ in range(m * n)]
+    nextOneDown = [-1 for _ in range(m * n)]
+
     # Create the nextOneRight map with row-wise traversal
-    prevEntry = []
+
     for i in range(m):
+        foundOneYet = False
+        #we won't be able to map the first 1 we find in a row until
+        #we find its closest neighbor to the right
+        prevEntry = [None for _ in range(2)]
+        #prevEntry needs to be inside the first for loop so it can't be
+        #something from the above row. also needs to be initialized so we can
+        #index into it
         for j in range(n):
             nextOneRight[i * n + j] = -1
             if matrix[i][j] == True:
-                if len(prevEntry) != 2:
+                if foundOneYet:
                     prevRowIndex = prevEntry[0]
                     prevColIndex = prevEntry[1]
                     nextOneRight[prevRowIndex * n + prevColIndex] = j
                     prevEntry = [i, j]
+                else:
+                    foundOneYet = True
+                    prevEntry = [i, j]
+
     # Create the nextOneDown map with col-wise traversal
-    prevEntry = []
+
     for j in range(n):
+        foundOneYet = False
+        prevEntry = [None for _ in range(2)]
         for i in range(m):
             nextOneDown[i * n + j] = -1
             if matrix[i][j] == True:
-                if len(prevEntry) != 2:
+                if foundOneYet:
                     prevRowIndex = prevEntry[0]
                     prevColIndex = prevEntry[1]
                     nextOneDown[prevRowIndex * n + prevColIndex] = i
                     prevEntry = [i, j]
+                else:
+                    foundOneYet = True
+                    prevEntry = [i, j]
+
     # Search for 1011 submatrix
     for topRow in range(m):
         for leftCol in range(n):

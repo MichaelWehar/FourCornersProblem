@@ -12,26 +12,19 @@ def lemma2Exists(m, n, matrix):
     #ColIndicesInRow = [set() for _ in range(m)]
     #RowIndicesInCol = [set() for _ in range(n)]
 
-    colIndicesInRow = [[] for _ in range(m)]
-    rowIndicesInCol = [[] for _ in range(n)]
-    colIndicesInRow_zeros = [[] for _ in range(m)]
-    rowIndicesInCol_zeros = [[] for _ in range(n)]
-
-
+    rowElements = [[] for _ in range(m)]
+    colElements = [[] for _ in range(n)]
 
     for i in range(m):
         for j in range(n):
             if(matrix[i][j] == True):
-                colIndicesInRow[i].append(j)
-                rowIndicesInCol[j].append(i)
-                colIndicesInRow_zeros[i].append(j)
-                rowIndicesInCol_zeros[j].append(i)
-            else:
-                colIndicesInRow_zeros[i].append(0)
-                rowIndicesInCol_zeros[j].append(0)
+                rowElements[i].append(j)
+                colElements[j].append(i)
 
 
 
+
+    for eachMatrixRow in range(m):
 
 
 
