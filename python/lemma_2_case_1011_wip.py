@@ -2,20 +2,13 @@
 # Author: Ari Liloia and Michael Wehar
 
 # Main Function
-def lemma2Exists(m, n, matrix):
 
-    # Map any location of a 1 such as (i, j) to the next location of a 1
-    # to the right or down
-
-
-    #need to initialize these arrays, otherwise
-    #we get "list assignment index out of range" error -Ari
-
-    nextOneRight = [-1 for _ in range(m * n)]
-    nextOneDown = [-1 for _ in range(m * n)]
-
+# Create the nextOneRight map with row-wise traversal
+def createNextRightMap(m, n, matrix):
     # Create the nextOneRight map with row-wise traversal
-
+    #need to initialize this array, otherwise
+    #we get "list assignment index out of range" error
+    nextOneRight = [None for _ in range(m * n)]
     for i in range(m):
         foundOneYet = False
         #we won't be able to map the first 1 we find in a row until
@@ -33,14 +26,18 @@ def lemma2Exists(m, n, matrix):
                     nextOneRight[prevRowIndex * n + prevColIndex] = j
                     prevEntry = [i, j]
                 else:
+                    #if this is the first one we find, don't add anything
+                    #to the mapping yet
                     foundOneYet = True
                     prevEntry = [i, j]
+    return nextOneRight
 
-    # Create the nextOneDown map with col-wise traversal
-
+# Create the nextOneDown map with col-wise traversal
+def createNextDownMap(m, n, matrix):
+    nextOneDown = [None for _ in range(m * n)]
     for j in range(n):
         foundOneYet = False
-        prevEntry = [None for _ in range(2)]
+        prevEntry = [None, None]
         for i in range(m):
             nextOneDown[i * n + j] = -1
             if matrix[i][j] == True:
@@ -52,6 +49,15 @@ def lemma2Exists(m, n, matrix):
                 else:
                     foundOneYet = True
                     prevEntry = [i, j]
+    return nextOneDown
+
+
+def lemma2Exists(m, n, matrix):
+
+    # Map any location of a 1 such as (i, j) to the next location of a 1
+    # to the right or down
+    nextOneRight = createNextRightMap(m, n, matrix)
+    nextOneDown = createNextDownMap(m, n, matrix)
 
     # Search for 1011 submatrix
     for topRow in range(m):
