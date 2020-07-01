@@ -5,10 +5,11 @@ import sys
 sys.path.insert(1, 'helper_functions')
 
 from matrix_reader import MatrixReader
-from lemma_2_case_1011_2 import lemma2Exists
-from lemma_2_case_1011_2 import createNextRightMap
+from primary_implementation_case_1011 import lemma2Exists
+from primary_implementation_case_1011 import createNextRightMap
+from primary_implementation_case_1011 import createNextDownMap
 
-# Run all six test cases
+# Run all test cases
 for i in range(1, 10):
     m, n, testMatrix = MatrixReader.read('test_matrices/testMatrix' + str(i) + '.txt')
     result = lemma2Exists(m, n, testMatrix)
