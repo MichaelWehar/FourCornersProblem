@@ -9,7 +9,7 @@ def rectExists(m, n, matrix):
         currentRow = []
         # Traverse through current row's elements to find all 1's (or true entries)
         for j in range(n):
-            if(matrix[i][j] == True):
+            if matrix[i][j] == True:
                 currentRow.append(j)
         # Efficiently traverse through pairs of column indexes with 1's (or true entries)
         # First, iterate over all possible entries containing 1 (or true)
