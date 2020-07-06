@@ -1,91 +1,77 @@
 # Created on 6/22/20
 # Author: Ari Liloia and Michael Wehar
 
-# Create the nextOneRight map with row-wise traversal
-def createNextRightMap(m, n, matrix):
-    nextOneRight = [None for _ in range(m * n)]
+########################
+# (1) Helper Functions #
+########################
+
+# Creates an m by n matrix with all entries equal to the default value
+def createMatrix(m, n, defaultValue = -1):
+    return [[defaultValue for _ in range(n)] for _ in range(m)]
+
+# Returns a new matrix that is the transpose of the original matrix
+def transposeMatrix(m, n, matrix):
+    # Create an empty n by m matrix
+    transposedMatrix = createMatrix(n, m)
+    for i in range(n):
+        for j in range(m):
+            transposedMatrix[i][j] = matrix[j][i]
+    return transposedMatrix
+
+#####################
+# (2) Preprocessing #
+#####################
+
+# Returns a map that sends each location (i, j) whose entry is one to
+# the next column index where there is a one.
+def createNextOneRightMap(m, n, matrix):
+    # Creates an m by n matrix
+    nextOneRight = createMatrix(m, n)
     for i in range(m):
-        # fact: before a row is traversed, no 1s have been found yet
-        foundOneYet = False
-        # fact: before a row is traversed, because no 1s have been found yet,
-        # the index of the previous 1 found is NULL
-        prevEntry = [None, None]
-        # for each element of a row:
+        # Fact: before a row is traversed, no ones have been found yet
+        # We use -1 to denote this initial case
+        prevColIndex = -1
+        # Iterate over each column index
         for j in range(n):
-            nextOneRight[i * n + j] = -1
-            # if a 1 is encountered in row i:
+            # Check if a one is encountered in row i
             if matrix[i][j] == True:
-                # if a 1 has previously been encountered in row i:
-                if foundOneYet:
-                    # recall the stored index of the previous 1
-                    prevRowIndex = prevEntry[0]
-                    prevColIndex = prevEntry[1]
-                    # map the index of the current 1 to the index of the previous 1
-                    nextOneRight[prevRowIndex * n + prevColIndex] = j
-                    # store the index of the current 1
-                    prevEntry = [i, j]
-                # if the current 1 is the first to be detected during a traversal:
-                else:
-                    # note that a 1 has previously been encountered in row i
-                    foundOneYet = True
-                    # store the index of the current 1
-                    prevEntry = [i, j]
+                # Check if a one has previously been encountered in row i
+                if prevColIndex != -1:
+                    # Map the index of the previous one to the column index
+                    # of the current one
+                    nextOneRight[i][prevColIndex] = j
+                # Store the column index of the current one
+                prevColIndex = j
     return nextOneRight
 
-# Create the nextOneDown map with col-wise traversal
-def createNextDownMap(m, n, matrix):
-    nextOneDown = [None for _ in range(m * n)]
-    for j in range(n):
-        # fact: before a column is traversed, no 1s have been found yet
-        foundOneYet = False
-        # fact: before a column is traversed, because no 1s have been found yet,
-        # the index of the previous 1 found is NULL
-        prevEntry = [None, None]
-        # for each element of a column:
-        for i in range(m):
-            nextOneDown[i * n + j] = -1
-            # if a 1 is encountered in column i:
-            if matrix[i][j] == True:
-                # if a 1 has previously been encountered in column i:
-                if foundOneYet:
-                    # recall the stored index of the previous 1
-                    prevRowIndex = prevEntry[0]
-                    prevColIndex = prevEntry[1]
-                    # map the index of the current 1 to the index of the previous 1
-                    nextOneDown[prevRowIndex * n + prevColIndex] = i
-                    # store the index of the current 1
-                    prevEntry = [i, j]
-                # if the current 1 is the first to be detected during a traversal:
-                else:
-                    # note that a 1 has previously been encountered in column i
-                    foundOneYet = True
-                    # store the index of the current 1
-                    prevEntry = [i, j]
-    return nextOneDown
+def createNextOneDownMap(m, n, matrix):
+    # The code from createNextOneRightMap can be reused on the transpose
+    # of matrix to find the next one down instead of right
+    transposedMatrix = transposeMatrix(m, n, matrix)
+    resultMap = createNextOneRightMap(n, m, transposedMatrix)
+    return transposeMatrix(n, m, resultMap)
 
+#################
+# (3) Algorithm #
+#################
 
-def lemma2Exists(m, n, matrix):
-
-    # Map any location of a 1 such as (i, j) to the next location of a 1
-    # to the right or down
-    nextOneRight = createNextRightMap(m, n, matrix)
-    nextOneDown = createNextDownMap(m, n, matrix)
+def rectExists1011(m, n, matrix):
+    # Map any location of a one such as (i, j) to the next location
+    # of a one to the right or down
+    nextOneRight = createNextOneRightMap(m, n, matrix)
+    nextOneDown = createNextOneDownMap(m, n, matrix)
 
     # Traverse through the matrix row by row
     for topRow in range(m):
         for leftCol in range(n):
-            # First, traverse through the current row's elements to find all 1's (or true entries)
-            # 1's found here constitute the top left corner of a possible submatrix
+            # Check if the current entry is a one
             if matrix[topRow][leftCol] == True:
-                # Next, recall the index of the closest true entry below the upper left corner, if one exists
-                # 1's found here constitute the bottom left corner of a possible submatrix
-                bottomRow = nextOneDown[topRow * n + leftCol]
-                if bottomRow != -1 and matrix[bottomRow][leftCol] == True:
-                    # Next, recall the index of the closest true entry to the right of the bottom left corner, if one exists
-                    # 1's found here constitute the bottom right corner of a possible submatrix
-                    rightCol = nextOneRight[bottomRow * n + leftCol]
-                    if rightCol != -1 and matrix[bottomRow][rightCol] == True and matrix[topRow][rightCol] == False:
-                        # Finally, check that the top right corner of the submatrix defined by the other three indices at which
-                        # 1's were found is 0 (or false)
+                # Find the next row index with a one entry in the current column
+                bottomRow = nextOneDown[topRow][leftCol]
+                if bottomRow != -1:
+                    # Find the next column index with a one entry in the current row
+                    rightCol = nextOneRight[bottomRow][leftCol]
+                    # Also, check that the top right corner entry is zero
+                    if rightCol != -1 and matrix[topRow][rightCol] == False:
                         return True
     return False
