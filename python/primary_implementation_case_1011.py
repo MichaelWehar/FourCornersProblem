@@ -15,6 +15,7 @@ def transposeMatrix(m, n, matrix):
     transposedMatrix = createMatrix(n, m)
     for i in range(n):
         for j in range(m):
+            # Copies date from original matrix to transposed matrix
             transposedMatrix[i][j] = matrix[j][i]
     return transposedMatrix
 
@@ -37,8 +38,8 @@ def createNextOneRightMap(m, n, matrix):
             if matrix[i][j] == True:
                 # Check if a one has previously been encountered in row i
                 if prevColIndex != -1:
-                    # Map the index of the previous one to the column index
-                    # of the current one
+                    # Map the column index of the previous one to the
+                    # column index of the current one
                     nextOneRight[i][prevColIndex] = j
                 # Store the column index of the current one
                 prevColIndex = j
@@ -60,7 +61,6 @@ def rectExists1011(m, n, matrix):
     # of a one to the right or down
     nextOneRight = createNextOneRightMap(m, n, matrix)
     nextOneDown = createNextOneDownMap(m, n, matrix)
-
     # Traverse through the matrix row by row
     for topRow in range(m):
         for leftCol in range(n):
