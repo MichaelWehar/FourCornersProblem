@@ -1,15 +1,81 @@
+# Created on 7/1/20
+# Author: Ari Liloia and Michael Wehar
 
+# Imports
+import math
 
+########################
+# (1) Helper Functions #
+########################
 
+# Creates an m by n matrix with all entries equal to the default value
+def createMatrix(m, n, defaultValue = -1):
+    return [[defaultValue for _ in range(n)] for _ in range(m)]
 
-def lemma3Exists(m,n,matrix):
+# Returns a new matrix that is the transpose of the original matrix
+def transposeMatrix(m, n, matrix):
+    # Create an empty n by m matrix
+    transposedMatrix = createMatrix(n, m)
+    for i in range(n):
+        for j in range(m):
+            # Copies date from original matrix to transposed matrix
+            transposedMatrix[i][j] = matrix[j][i]
+    return transposedMatrix
 
-    if (m == n):
+# Creates a new matrix that is a specific block from the original matrix
+# The block starts at row r and column c and extends for a specified
+# number of rows and columns
+def block(r, c, rows, cols, matrix):
+    blockMatrix = createMatrix(rows, cols)
+    for i in range(0, rows):
+        for j in range(0, cols):
+            if (r + i) in matrix and (c + j) in matrix[r + i]:
+                blockMatrix[i][j] = matrix[r + i][c + j]
+            else:
+                blockMatrix[i][j] = 0
+    return blockMatrix
+
+#################
+# (2) Algorithm #
+#################
+
+def rectExists1001(m, n, matrix):
+    # Trivial case
+    if m < 2 or n < 2:
+        return False
+    # Non-trivial cases
+    if m == n:
+        # Find smallest power of two larger than n
+        k = math.ceil(math.log(n, 2))
+        l = math.pow(2, k)
+        # Solve problem for square matrix with dummy
+        # zero columns and rows appended to the end
+        return squareCase(l, l, matrix)
     # case 1: square matrix
         # initialize top mapping array
         # initialize bottom mapping array
         #
 
+# Requires that n is a power of 2
+def squareCase(n, matrix):
+    # Computing dimensions of four smaller matrices
+    halfOfN = n / 2 # Divides evenly because n is a power of 2
+    # Horizontal Split
+    topMatrix = block(0, 0, halfOfN, n, matrix)
+    bottomMatrix = block(halfOfN, 0, halfOfN, n, matrix)
+    # Top Vertical Split
+    topLeftMatrix = block(0, 0, halfOfN, halfOfN, topMatrix)
+    topRightMatrix = block(0, halfOfN, halfOfN, halfOfN, topMatrix)
+    # Bottom Vertical Split
+    bottomLeftMatrix = block(0, 0, halfOfN, halfOfN, bottomMatrix)
+    bottomRightMatrix = block(0, halfOfN, halfOfN, halfOfN, bottomMatrix)
+    # Recursive step
+    return squareCase(halfOfN, topLeftMatrix) || squareCase(halfOfN, topRightMatrix) ||
+           squareCase(halfOfN, bottomLeftMatrix) || squareCase(halfOfN, bottomRightMatrix) ||
+           splitCase(halfOfN, n, topMatrix, bottomMatrix)
+
+def splitCase(rows, cols, topMatrix, bottomMatrix):
+    pass
 
 # 0 : 0 1 0 0 0 1 0 1
 # 1 : 1 0 1 1 0 0 0 0
