@@ -8,6 +8,44 @@ import math
 # (1) Helper Functions #
 ########################
 
+# this function takes a matrix, its orientation in relation to its corresponding matrix
+# (topMatrix or bottomMatrix), the orientation of its boundary (vertical or horizontal)
+# n (the number of column indices in the initial set, before the first round of split being called)
+# one columnSet (one of the returns from a previous call to this function) and the row
+# index of the matrix to examine.
+# it returns zeroSet and oneSet, which (?) contain the column indices that differ (badly worded)
+def split(matrix, matrixOrientation, boundaryOrientation, n, columnSet, rowIndex):
+    # matrixOrientation: is the matrix topMatrix or bottomMatrix?
+    # boundaryOrientation: is the boundary betwen the matrices horizontal or vertical?
+    # if the boundary orientation is vertical, "topMatrix" is the submatrix on the right.
+
+    zeroSet = set()
+    oneSet = set()
+
+    for i in columnSet:
+        if boundaryOrientation == 'horizontal' and matrixOrientation == 'bottom':
+            if matrix[rowIndex][i] == 0:
+                zeroSet.add(i)
+            elif matrix[rowIndex][i] == 1:
+                oneSet.add(i)
+        elif boundaryOrientation == 'horizontal' and matrixOrientation == 'top':
+            if matrix[int(n/2)-rowIndex-1][i] == 0:
+                zeroSet.add(i)
+            elif matrix[int(n/2)-rowIndex-1][i] == 1:
+                oneSet.add(i)
+        elif boundaryOrientation == 'vertical' and matrixOrientation == 'bottom':
+            if matrix[i][n-rowIndex-1] == 0:
+                zeroSet.add(i)
+            elif matrix[i][n-rowIndex-1] == 1:
+                oneSet.add(i)
+        elif boundaryOrientation == 'vertical' and matrixOrientation == 'top':
+            if matrix[i][rowIndex] == 0:
+                zeroSet.add(i)
+            elif matrix[i][rowIndex] == 1:
+                oneSet.add(i)
+
+    return zeroSet, oneSet
+
 # Creates an m by n matrix with all entries equal to the default value
 def createMatrix(m, n, defaultValue = -1):
     return [[defaultValue for _ in range(n)] for _ in range(m)]
@@ -29,7 +67,7 @@ def block(r, c, rows, cols, matrix):
     blockMatrix = createMatrix(rows, cols)
     for i in range(0, rows):
         for j in range(0, cols):
-            if (r + i) in matrix and (c + j) in matrix[r + i]:
+            if (r + i) < len(matrix) and (c + j) < len(matrix[0]):
                 blockMatrix[i][j] = matrix[r + i][c + j]
             else:
                 blockMatrix[i][j] = 0
@@ -46,8 +84,8 @@ def rectExists1001(m, n, matrix):
     # Non-trivial cases
     if m == n:
         # Find smallest power of two larger than n
-        k = math.ceil(math.log(n, 2))
-        l = math.pow(2, k)
+        k = int(math.ceil(math.log(n, 2)))
+        l = int(math.pow(2, k))
         # Solve problem for square matrix with dummy
         # zero columns and rows appended to the end
         return squareCase(l, l, matrix)
@@ -70,12 +108,61 @@ def squareCase(n, matrix):
     bottomLeftMatrix = block(0, 0, halfOfN, halfOfN, bottomMatrix)
     bottomRightMatrix = block(0, halfOfN, halfOfN, halfOfN, bottomMatrix)
     # Recursive step
-    return squareCase(halfOfN, topLeftMatrix) || squareCase(halfOfN, topRightMatrix) ||
-           squareCase(halfOfN, bottomLeftMatrix) || squareCase(halfOfN, bottomRightMatrix) ||
-           splitCase(halfOfN, n, topMatrix, bottomMatrix)
+    return squareCase(halfOfN, topLeftMatrix) or squareCase(halfOfN, topRightMatrix) or squareCase(halfOfN, bottomLeftMatrix) or squareCase(halfOfN, bottomRightMatrix) or splitCase(halfOfN, n, topMatrix, bottomMatrix, 'horizontal')
 
-def splitCase(rows, cols, topMatrix, bottomMatrix):
+def check(x,y):
     pass
+
+
+def splitCase(rows, cols, topMatrix, bottomMatrix, boundaryOrientation):
+
+    topMatrixMap = {}
+
+    if boundaryOrientation == 'horizontal'
+        listOfSets = [{x for x in range(cols)}]
+    elif boundaryOrientation == 'vertical'
+        listOfSets = [{x for x in range(rows)}]
+
+    for i in range(int(n/2)):
+        newListOfSets = []
+            for columnSet in listOfSets:
+                zeroSet, oneSet = split(topMatrix, 'top', boundaryOrientation, n, columnSet, i)
+                if len(zeroSet) > 0 and len(oneSet) > 0:
+                    for x in zeroSet:
+                        for y in oneSet:
+                            check(x, y)
+
+                if len(zeroSet) >= 2:
+                    newListOfSets.append(zeroSet)
+                if len(oneSet) >= 2:
+                    newListOfSets.append(oneSet)
+        listOfSets = newListOfSets
+
+    bottomMatrixMap = {}
+
+    if boundaryOrientation == 'horizontal'
+        listOfSets = [{x for x in range(cols)}]
+    elif boundaryOrientation == 'vertical'
+        listOfSets = [{x for x in range(rows)}]
+
+    for i in range(int(n/2)):
+        newListOfSets = []
+            for columnSet in listOfSets:
+                zeroSet, oneSet = split(bottomMatrix, 'bottom', boundaryOrientation, n, columnSet, i)
+                if len(zeroSet) > 0 and len(oneSet) > 0:
+                    for x in zeroSet:
+                        for y in oneSet:
+                            check(x, y)
+
+                if len(zeroSet) >= 2:
+                    newListOfSets.append(zeroSet)
+                if len(oneSet) >= 2:
+                    newListOfSets.append(oneSet)
+        listOfSets = newListOfSets
+
+
+
+
 
 # 0 : 0 1 0 0 0 1 0 1
 # 1 : 1 0 1 1 0 0 0 0
