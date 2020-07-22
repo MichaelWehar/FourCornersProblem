@@ -93,6 +93,7 @@ def rectExists1001(m, n, matrix):
         # initialize top mapping array
         # initialize bottom mapping array
         #
+    return False
 
 # Requires that n is a power of 2
 def squareCase(n, matrix):
