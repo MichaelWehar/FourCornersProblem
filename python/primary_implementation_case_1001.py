@@ -8,54 +8,28 @@ import math
 # (1) Helper Functions #
 ########################
 
-def createEmptyArray(n):
-    return [0 for _ in range(n)]
-
 # Creates an m by n matrix with all entries equal to the default value
 def createMatrix(m, n, defaultValue = -1):
     return [[defaultValue for _ in range(int(n))] for _ in range(int(m))]
 
-# Returns a new matrix that is the reflection of the original matrix over
-# its bottom edge
-def flipMatrixOverBottomEdge(matrix, rows, cols):
-    # Create an empty n by m matrix
-    flippedMatrix = createMatrix(rows, cols)
-    for i in range(rows):
-        flippedMatrix[i] = matrix[rows-i-1]
-    #print("matrix flipped over bottom edge")
-    return flippedMatrix
-
 # Returns a new matrix that is the transpose of the original matrix
-def transposeMatrix(matrix, rows, cols):
+def transposeMatrix(rows, cols, matrix):
     # Create an empty n by m matrix
-    transposedMatrix = createMatrix(cols,rows)
+    transposedMatrix = createMatrix(cols, rows)
     for i in range(rows):
         for j in range(cols):
             # Copies data from original matrix to transposed matrix
             transposedMatrix[j][i] = matrix[i][j]
-    #print("matrix transposed")
     return transposedMatrix
 
-# Returns a new matrix that is the rotation of the original matrix
-# 90 degrees clockwise
-def rotateMatrixRight(matrix, rows, cols):
+# Returns a new matrix that is the reflection of the original matrix over
+# its bottom edge
+def flipMatrixOverBottomEdge(rows, cols, matrix):
     # Create an empty n by m matrix
-    rotatedMatrix = createMatrix(cols,rows)
+    flippedMatrix = createMatrix(rows, cols)
     for i in range(rows):
-        for j in range(cols):
-            # Copies data from original matrix to transposed matrix
-            rotatedMatrix[j][i] = matrix[rows-i-1][j]
-    return rotatedMatrix
-
-# Returns a new matrix that is the rotation of the original matrix
-# 90 degrees counterclockwise
-def rotateMatrixLeft(matrix, rows, cols):
-    # call rotateMatrixRight three times
-    tempMatrix1 = rotateMatrixRight(matrix,rows,cols)
-    tempMatrix2 = rotateMatrixRight(tempMatrix1,cols,rows)
-    rotatedMatrix = rotateMatrixRight(tempMatrix2,rows,cols)
-    #print("matrix rotated left")
-    return rotatedMatrix
+        flippedMatrix[i] = matrix[rows - i - 1]
+    return flippedMatrix
 
 # Creates a new matrix that is a specific block from the original matrix
 # The block starts at row r and column c and extends for a specified
@@ -110,50 +84,44 @@ def squareCase(n, matrix):
     bottomLeftMatrix = block(0, 0, halfOfN, halfOfN, bottomMatrix)
     bottomRightMatrix = block(0, halfOfN, halfOfN, halfOfN, bottomMatrix)
 
-    # Transpose of Vertical Cases
-    #transposeTopLeftMatrix = transposeMatrix(halfOfN, halfOfN, topLeftMatrix)
-    #transposeTopRightMatrix = transposeMatrix(halfOfN, halfOfN, topRightMatrix)
-    #transposeBottomLeftMatrix = transposeMatrix(halfOfN, halfOfN, bottomLeftMatrix)
-    #transposeBottomRightMatrix = transposeMatrix(halfOfN, halfOfN, bottomRightMatrix)
-
     # Recursive step - 4 square cases and 3 split cases
     # def splitCase(rows, cols, topMatrix_beforeFlip, bottomMatrix_beforeFlip, boundaryOrientation):
     return squareCase(halfOfN, topLeftMatrix) or squareCase(halfOfN, topRightMatrix) \
         or squareCase(halfOfN, bottomLeftMatrix) or squareCase(halfOfN, bottomRightMatrix) \
-        or splitCase(halfOfN, halfOfN, topLeftMatrix, topRightMatrix, 'vertical') \
-        or splitCase(halfOfN, halfOfN, bottomLeftMatrix, bottomRightMatrix, 'vertical') \
-        or splitCase(halfOfN, n, topMatrix, bottomMatrix, 'horizontal')
+        or splitCaseVertical(halfOfN, halfOfN, topLeftMatrix, topRightMatrix) \
+        or splitCaseVertical(halfOfN, halfOfN, bottomLeftMatrix, bottomRightMatrix) \
+        or splitCaseHorizontal(halfOfN, n, topMatrix, bottomMatrix)
 
-# given an array "row" with length cols and a set "columnSet" that can contain
-# the numbers 0 through cols exclusive, return a set of all the numbers in "columnSet"
-# that correspond to indices of "row" containing 0 (zeroSet) and 1 (oneSet)
-def splitIndices(row, columnSet):
+# Given an array "row" of length "cols" consisting of 0's and 1's and a set of
+# column indexes "columnSet", we split columnSet into two sets zeroSet, oneSet
+# zeroSet contains indexes with 0 in row
+# oneSet contains indexes with 1 in row
+def splitColumnSet(row, columnSet):
     # initialize empty sets
     zeroSet = set()
     oneSet = set()
-    # iterate through indices specified in columnSet
+    # iterate through indexes specified in columnSet
     for i in columnSet:
-        # add indices containing 0 to zeroSet and indices containing 1 to oneSet
+        # add indexes containing 0 to zeroSet and indexes containing 1 to oneSet
         if row[i] == 0:
             zeroSet.add(i)
         elif row[i] == 1:
             oneSet.add(i)
     return zeroSet, oneSet
 
-def computeColumnPairMap(matrix, rows, cols):
-    # takes in a matrix of size (rows, cols)
-    # reads through the matrix from "top to bottom, left to right"
+# Reads through the matrix from left to right, top to bottom
+# For each pair of columns, we identify the first row where they differ in value
+def computeColumnPairMap(rows, cols, matrix):
     columnPairMap = createMatrix(cols, cols)
-    #print(columnPairMap)
-    # Initialize the list of sets so that it contains one set containing
-    # all column indices
+    # Initialize the list of sets so that it contains one set with
+    # all of the column indexes
     listOfSets = [set(range(cols))]
     # Go through each row
     i = 0
     while i < rows and len(listOfSets) > 0:
         newListOfSets = []
         for columnSet in listOfSets:
-            zeroSet, oneSet = splitIndices(matrix[i], columnSet)
+            zeroSet, oneSet = splitColumnSet(matrix[i], columnSet)
             if len(zeroSet) > 0 and len(oneSet) > 0:
                 for x in zeroSet:
                     for y in oneSet:
@@ -169,32 +137,25 @@ def computeColumnPairMap(matrix, rows, cols):
     #print("one column pair map returned")
     return columnPairMap
 
+def splitCaseVertical(rows, cols, leftMatrix, rightMatrix):
+    topMatrix = transposeMatrix(rows, cols, leftMatrix)
+    bottomMatrix = transposeMatrix(rows, cols, rightMatrix)
+    return splitCaseHorizontal(cols, rows, topMatrix, bottomMatrix)
 
-def splitCase(rows, cols, topMatrix_beforeFlip, bottomMatrix_beforeFlip, boundaryOrientation):
-    # note: bottom matrix is where we look for (0,1) pattern, top matrix is where we look for (1,0)
-
-    if boundaryOrientation == 'horizontal':
-        topMatrix = flipMatrixOverBottomEdge(topMatrix_beforeFlip,rows,cols)
-        bottomMatrix = bottomMatrix_beforeFlip
-    elif boundaryOrientation == 'vertical':
-        topMatrix = rotateMatrixLeft(topMatrix_beforeFlip,rows,cols)
-        bottomMatrix = transposeMatrix(bottomMatrix_beforeFlip,rows,cols)
-
-    topMatrixMap = computeColumnPairMap(topMatrix, rows, cols)
-    #print(topMatrix)
-    #print(bottomMatrix)
-    bottomMatrixMap = computeColumnPairMap(bottomMatrix, rows, cols)
-    #print("topmatrixmap")
-    #print(topMatrixMap)
-    #print("bottomamatrixmap")
-    #print(bottomMatrixMap)
+def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
+    # Bottom matrix is where we look for (0, 1) pattern and
+    # top matrix is where we look for (1, 0)
+    topMatrixAfterFlip = flipMatrixOverBottomEdge(rows, cols, topMatrix)
+    # Compute column pair maps
+    topMatrixAfterFlipMap = computeColumnPairMap(rows, cols, topMatrixAfterFlip)
+    bottomMatrixMap = computeColumnPairMap(rows, cols, bottomMatrix)
     # Compare top and bottom maps
     for i in range(cols):
         for j in range(i + 1, cols):
-            topRow = topMatrixMap[i][j]
-            bottomRow = bottomMatrixMap[i][j]
-            if topRow != -1 and bottomRow != -1 and topMatrix[topRow][i] == 1 and topMatrix[topRow][j] == 0:
-                #print("true")
-                return True
-    #print("false")
+            tRow = topMatrixAfterFlipMap[i][j]
+            bRow = bottomMatrixMap[i][j]
+            if tRow != -1 and bRow != -1 \
+              and topMatrixAfterFlip[tRow][i] == 1 and topMatrixAfterFlip[tRow][j] == 0 \
+              and bottomMatrixMap[bRow][i] == 0 and bottomMatrixMap[bRow][j] == 1:
+               return True
     return False

@@ -129,7 +129,7 @@ def computeColumnPairMap(rows, cols, matrix):
         i += 1
     return columnPairMap
 
-def splitCase(rows, cols, topMatrix, bottomMatrix, boundaryOrientation):
+def splitCase(rows, cols, topMatrix, bottomMatrix):
     # Flip topMatrix by reversing the row ordering
     # In other words, we flip the matrix over the x axis
     flipTopMatrix = flipRowIndices(rows, cols, topMatrix)
@@ -143,7 +143,7 @@ def splitCase(rows, cols, topMatrix, bottomMatrix, boundaryOrientation):
             bottomRow = bottomMatrixMap[i][j]
             if flipTopRow != -1 and bottomRow != -1 \
                and flipTopMatrix[flipTopRow][i] == 1 and flipTopMatrix[flipTopRow][j] == 0 \
-               and bottomMatrixMap[bottomRow][i] == 0 and bottomMatrixMap[bottomRow][j]:
+               and bottomMatrixMap[bottomRow][i] == 0 and bottomMatrixMap[bottomRow][j] == 1:
                return True
     return False
 
