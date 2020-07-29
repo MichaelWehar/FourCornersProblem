@@ -49,22 +49,20 @@ def block(r, c, rows, cols, matrix):
 #################
 
 def rectExists1001(m, n, matrix):
-    # Trivial case
-    if m < 2 or n < 2:
+    if m < 2 or n < 2: # Trivial case
         return False
-    # Non-trivial cases
-    if m == n:
+    elif m == n:
         # Find smallest power of two larger than n
         k = int(math.ceil(math.log(n, 2)))
         l = int(math.pow(2, k))
         # Solve problem for square matrix with dummy
         # zero columns and rows appended to the end
         return squareCase(l, matrix)
-    # case 1: square matrix
-        # initialize top mapping array
-        # initialize bottom mapping array
-        #
-    return False
+    elif m > n:
+        return nonSquareCase(m, n, matrix)
+    else:
+        transposedMatrix = transposeMatrix(m, n, matrix)
+        return nonSquareCase(n, m, transposedMatrix)
 
 # Requires that n is a power of 2
 def squareCase(n, matrix):
@@ -164,4 +162,20 @@ def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
               and topMatrixAfterFlip[tRow][i] == 1 and topMatrixAfterFlip[tRow][j] == 0 \
               and bottomMatrix[bRow][i] == 0 and bottomMatrix[bRow][j] == 1:
                return True
+    return False
+
+# Assumes that m > n
+def nonSquareCase(m, n, matrix):
+    # Number of square matrices
+    d = int(math.ceil(m / n))
+    # Create a list of square matrices and check if they contain the 1001 patten
+    listOfSquareMatrices = []
+    for i in range(d):
+        squareMatrix = matrix.block(i * n, 0, n, n)
+        if squareCase(n, squareMatrix):
+            return True
+        else:
+            listOfSquareMatrices.append(squareMatrix)
+    # Check horizontal split cases
+    # TODO
     return False
