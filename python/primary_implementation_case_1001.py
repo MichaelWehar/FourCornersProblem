@@ -72,14 +72,15 @@ def squareCase(n, matrix):
     if n < 2:
         return False
 
-    halfOfN = int(n / 2) # Divides evenly because n is a power of 2
+    #halfOfN = int(n / 2) # Divides evenly because n is a power of 2
+    halfOfN = int(n / 2)
 
     # Horizontal Split
     topMatrix = block(0, 0, halfOfN, n, matrix)
     bottomMatrix = block(halfOfN, 0, halfOfN, n, matrix)
-
     # Top and Bottom Vertical Splits
     topLeftMatrix = block(0, 0, halfOfN, halfOfN, topMatrix)
+
     topRightMatrix = block(0, halfOfN, halfOfN, halfOfN, topMatrix)
     bottomLeftMatrix = block(0, 0, halfOfN, halfOfN, bottomMatrix)
     bottomRightMatrix = block(0, halfOfN, halfOfN, halfOfN, bottomMatrix)
@@ -134,14 +135,21 @@ def computeColumnPairMap(rows, cols, matrix):
                 newListOfSets.append(oneSet)
         listOfSets = newListOfSets
         i += 1
-    #print("one column pair map returned")
     return columnPairMap
 
+# Transpose the top and bottom matrices so that they can be processed as if
+# the boundary between them was oriented horizontally
 def splitCaseVertical(rows, cols, leftMatrix, rightMatrix):
-    topMatrix = transposeMatrix(rows, cols, leftMatrix)
-    bottomMatrix = transposeMatrix(rows, cols, rightMatrix)
-    return splitCaseHorizontal(cols, rows, topMatrix, bottomMatrix)
+    # Bottom matrix is where we look for (0, 1) pattern and
+    # top matrix is where we look for (1, 0)
+    topMatrixTranspose = transposeMatrix(rows, cols, leftMatrix)
+    #topMatrixFinal = flipMatrixOverBottomEdge(rows, cols, topMatrixTranspose)
+    bottomMatrixTranspose = transposeMatrix(rows, cols, rightMatrix)
 
+    return splitCaseHorizontal(cols, rows, topMatrixTranspose, bottomMatrixTranspose)
+
+# Build up maps of the row closest to the boundary where indices differ,
+# then iterate through and compare the maps.
 def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
     # Bottom matrix is where we look for (0, 1) pattern and
     # top matrix is where we look for (1, 0)
@@ -156,6 +164,6 @@ def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
             bRow = bottomMatrixMap[i][j]
             if tRow != -1 and bRow != -1 \
               and topMatrixAfterFlip[tRow][i] == 1 and topMatrixAfterFlip[tRow][j] == 0 \
-              and bottomMatrixMap[bRow][i] == 0 and bottomMatrixMap[bRow][j] == 1:
+              and bottomMatrix[bRow][i] == 0 and bottomMatrix[bRow][j] == 1:
                return True
     return False
