@@ -72,15 +72,15 @@ def squareCase(n, matrix):
     if n < 2:
         return False
 
-    #halfOfN = int(n / 2) # Divides evenly because n is a power of 2
+    # n / 2 will be a integer because n is a power of 2
     halfOfN = int(n / 2)
 
     # Horizontal Split
     topMatrix = block(0, 0, halfOfN, n, matrix)
     bottomMatrix = block(halfOfN, 0, halfOfN, n, matrix)
+
     # Top and Bottom Vertical Splits
     topLeftMatrix = block(0, 0, halfOfN, halfOfN, topMatrix)
-
     topRightMatrix = block(0, halfOfN, halfOfN, halfOfN, topMatrix)
     bottomLeftMatrix = block(0, 0, halfOfN, halfOfN, bottomMatrix)
     bottomRightMatrix = block(0, halfOfN, halfOfN, halfOfN, bottomMatrix)
@@ -140,16 +140,14 @@ def computeColumnPairMap(rows, cols, matrix):
 # Transpose the top and bottom matrices so that they can be processed as if
 # the boundary between them was oriented horizontally
 def splitCaseVertical(rows, cols, leftMatrix, rightMatrix):
-    # Bottom matrix is where we look for (0, 1) pattern and
-    # top matrix is where we look for (1, 0)
-    topMatrixTranspose = transposeMatrix(rows, cols, leftMatrix)
-    #topMatrixFinal = flipMatrixOverBottomEdge(rows, cols, topMatrixTranspose)
-    bottomMatrixTranspose = transposeMatrix(rows, cols, rightMatrix)
+    # Top matrix is where we look for (1, 0) and
+    # Bottom matrix is where we look for (0, 1) pattern
+    topMatrix = transposeMatrix(rows, cols, leftMatrix)
+    bottomMatrix = transposeMatrix(rows, cols, rightMatrix)
+    return splitCaseHorizontal(cols, rows, topMatrix, bottomMatrix)
 
-    return splitCaseHorizontal(cols, rows, topMatrixTranspose, bottomMatrixTranspose)
-
-# Build up maps of the row closest to the boundary where indices differ,
-# then iterate through and compare the maps.
+# Build up column pair maps of the row closest to the boundary where entries
+# differ, then iterate through and compare the maps
 def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
     # Bottom matrix is where we look for (0, 1) pattern and
     # top matrix is where we look for (1, 0)
