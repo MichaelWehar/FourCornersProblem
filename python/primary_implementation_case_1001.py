@@ -166,10 +166,21 @@ def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
                return True
     return False
 
-##############
+##########################################
 
-
-def addToColumnPairMap(rows, cols, matrix, oldColumnPairMap, currentIndex):
+# Used for augmenting the top matrix map for the case of m > n matrix
+# Differences between addToColumnPairMap and computeColumnPairMap:
+# computeColumnPairMap starts by defining a matrix to be used as a new map,
+# addToColumnPairMap takes as an argument a matrix to be augmented
+# in computeColumnPairMap, the values placed into topMatrixAfterFlipMap
+# reference row indexes of topMatrixAfterFlip
+# in addToColumnPairMa, the values placed into topMatrixAfterFlipMap
+# reference row indexes of the original matrix input to rectExists1001
+#
+# ask mike: could we use naming convention "local row index" vs "global row index" when
+# referring to a row of topMatrix? local row index being row index within topMatrixAfterFlip,
+# global row index being row index within original matrix input to rectExists1001
+def addToColumnPairMap(rows, cols, matrix, columnPairMap, currentIndex):
     #columnPairMap = createMatrix(cols, cols)
     # Initialize the list of sets so that it contains one set with
     # all of the column indexes
@@ -185,22 +196,27 @@ def addToColumnPairMap(rows, cols, matrix, oldColumnPairMap, currentIndex):
                     for y in oneSet:
                         a = min(x, y)
                         b = max(x, y)
-                        # this equation, given the index of the current matrix in the list of
-                        # square matrices and the current row of the flipped top matrix,
-                        # puts into the column pair map the row of the full matrix, not just
-                        # the top matrix, at which a difference between column indexes was found.
-                        oldColumnPairMap[a][b] = ((currentIndex + 1) * cols) - (i + 1)
+                        # given the index of the current top matrix in the list of
+                        # square matrices(currentIndex) and the current row of the flipped
+                        # top matrix being examined (i), put into the column pair map the row
+                        # of the full matrix, not just the top matrix, at which a difference
+                        # between column indexes was found.
+                        columnPairMap[a][b] = ((currentIndex + 1) * cols) - (i + 1)
+                        # show Mike on paper how this works when we go over this part
             if len(zeroSet) >= 2:
                 newListOfSets.append(zeroSet)
             if len(oneSet) >= 2:
                 newListOfSets.append(oneSet)
         listOfSets = newListOfSets
         i += 1
-    #print(oldColumnPairMap)
-    return oldColumnPairMap
+    return columnPairMap
 
-
-
+# Assumes that m > n
+# differences between splitCaseHorizontal and splitCaseHorizontal_nonSquareCase
+# splitCaseHorizontal_nonSquareCase takes two additional inputs: "currentIndex" which is used in addToColumnPairMap
+# to calculate global row index from local row index, and "fullMatrix" (aka the original matrix input to rectExists1001).
+# We reference the original full matrix instead of the partial top matrix in the last step.
+# we also return an additional value: the augmented topMatrixAfterFlipMap
 def splitCaseHorizontal_nonSquareCase(rows, cols, topMatrix, bottomMatrix, previousTopMap, currentIndex, fullMatrix):
     # Bottom matrix is where we look for (0, 1) pattern and
     # top matrix is where we look for (1, 0)
@@ -209,7 +225,6 @@ def splitCaseHorizontal_nonSquareCase(rows, cols, topMatrix, bottomMatrix, previ
     topMatrixAfterFlipMap = addToColumnPairMap(rows, cols, topMatrixAfterFlip, previousTopMap, currentIndex)
     # Compute new bottom matrix column pair map
     bottomMatrixMap = computeColumnPairMap(rows, cols, bottomMatrix)
-    #print(bottomMatrixMap)
     # Compare top and bottom maps
     for i in range(cols):
         for j in range(i + 1, cols):
@@ -223,7 +238,6 @@ def splitCaseHorizontal_nonSquareCase(rows, cols, topMatrix, bottomMatrix, previ
 
 # Assumes that m > n
 def nonSquareCase(m, n, matrix):
-
     # Number of square matrices
     d = int(math.ceil(m / n))
     # Create a list of square matrices and check if they contain the 1001 patten
@@ -236,10 +250,8 @@ def nonSquareCase(m, n, matrix):
             listOfSquareMatrices.append(squareMatrix)
     # Check horizontal split cases
     topColumnPairMap = createMatrix(n, n)
-    tempColumnPairMap = createMatrix(n, n)
     for i in range(len(listOfSquareMatrices) - 1):
-        bool, tempColumnPairMap = splitCaseHorizontal_nonSquareCase(n, n, listOfSquareMatrices[i], listOfSquareMatrices[i+1], topColumnPairMap, i, matrix)
-        topColumnPairMap = tempColumnPairMap
-        if bool:
+        splitCaseFound, topColumnPairMap = splitCaseHorizontal_nonSquareCase(n, n, listOfSquareMatrices[i], listOfSquareMatrices[i+1], topColumnPairMap, i, matrix)
+        if splitCaseFound:
             return True
     return False
