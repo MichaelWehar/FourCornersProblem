@@ -11,7 +11,7 @@ from alternative_implementation_case_1111 import altRectExists
 # Case 1011
 from primary_implementation_case_1011 import rectExists1011
 # Case 1001
-from augmented_implementation_case_1001 import rectExists1001
+from primary_implementation_case_1001 import rectExists1001
 
 
 # Run all nine test cases
