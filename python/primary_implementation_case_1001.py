@@ -167,17 +167,6 @@ def compareColumnPairMaps(cols, firstMatrix, firstMatrixMap, secondMatrix, secon
                return True
     return False
 
-##########################################
-
-# Used for augmenting the top matrix map for the case of m > n matrix
-# Differences between addToColumnPairMap and computeColumnPairMap:
-# computeColumnPairMap starts by defining a matrix to be used as a new map,
-# addToColumnPairMap takes as an argument a matrix to be augmented
-# in computeColumnPairMap, the values placed into topMatrixAfterFlipMap
-# reference row indexes of topMatrixAfterFlip
-# in addToColumnPairMa, the values placed into topMatrixAfterFlipMap
-# reference row indexes of the original matrix input to rectExists1001
-
 # Assumes that m > n
 def nonSquareCase(m, n, matrix):
     # Number of square matrices
