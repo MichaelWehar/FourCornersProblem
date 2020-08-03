@@ -8,8 +8,6 @@ import math
 # (1) Helper Functions #
 ########################
 
-
-
 # Creates an m by n matrix with all entries equal to the default value
 def createMatrix(m, n, defaultValue = -1):
     return [[defaultValue for _ in range(int(n))] for _ in range(int(m))]
@@ -156,13 +154,16 @@ def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
     topMatrixAfterFlipMap = computeColumnPairMap(rows, cols, topMatrixAfterFlip)
     bottomMatrixMap = computeColumnPairMap(rows, cols, bottomMatrix)
     # Compare top and bottom maps
+    return compareColumnPairMaps(cols, topMatrixAfterFlip, topMatrixAfterFlipMap, bottomMatrix, bottomMatrixMap)
+
+def compareColumnPairMaps(cols, firstMatrix, firstMatrixMap, secondMatrix, secondMatrixMap):
     for i in range(cols):
         for j in range(i + 1, cols):
-            tRow = topMatrixAfterFlipMap[i][j]
-            bRow = bottomMatrixMap[i][j]
-            if tRow != -1 and bRow != -1 \
-              and topMatrixAfterFlip[tRow][i] == 1 and topMatrixAfterFlip[tRow][j] == 0 \
-              and bottomMatrix[bRow][i] == 0 and bottomMatrix[bRow][j] == 1:
+            firstRow = firstMatrixMap[i][j]
+            secondRow = secondMatrixMap[i][j]
+            if firstRow != -1 and secondRow != -1 \
+              and firstMatrix[firstRow][i] == 1 and firstMatrix[firstRow][j] == 0 \
+              and secondMatrix[secondRow][i] == 0 and secondMatrix[secondRow][j] == 1:
                return True
     return False
 
@@ -176,65 +177,6 @@ def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
 # reference row indexes of topMatrixAfterFlip
 # in addToColumnPairMa, the values placed into topMatrixAfterFlipMap
 # reference row indexes of the original matrix input to rectExists1001
-#
-# ask mike: could we use naming convention "local row index" vs "global row index" when
-# referring to a row of topMatrix? local row index being row index within topMatrixAfterFlip,
-# global row index being row index within original matrix input to rectExists1001
-def addToColumnPairMap(rows, cols, matrix, columnPairMap, currentIndex):
-    #columnPairMap = createMatrix(cols, cols)
-    # Initialize the list of sets so that it contains one set with
-    # all of the column indexes
-    listOfSets = [set(range(cols))]
-    # Go through each row
-    i = 0
-    while i < rows and len(listOfSets) > 0:
-        newListOfSets = []
-        for columnSet in listOfSets:
-            zeroSet, oneSet = splitColumnSet(matrix[i], columnSet)
-            if len(zeroSet) > 0 and len(oneSet) > 0:
-                for x in zeroSet:
-                    for y in oneSet:
-                        a = min(x, y)
-                        b = max(x, y)
-                        # given the index of the current top matrix in the list of
-                        # square matrices(currentIndex) and the current row of the flipped
-                        # top matrix being examined (i), put into the column pair map the row
-                        # of the full matrix, not just the top matrix, at which a difference
-                        # between column indexes was found.
-                        columnPairMap[a][b] = ((currentIndex + 1) * cols) - (i + 1)
-                        # show Mike on paper how this works when we go over this part
-            if len(zeroSet) >= 2:
-                newListOfSets.append(zeroSet)
-            if len(oneSet) >= 2:
-                newListOfSets.append(oneSet)
-        listOfSets = newListOfSets
-        i += 1
-    return columnPairMap
-
-# Assumes that m > n
-# differences between splitCaseHorizontal and splitCaseHorizontal_nonSquareCase
-# splitCaseHorizontal_nonSquareCase takes two additional inputs: "currentIndex" which is used in addToColumnPairMap
-# to calculate global row index from local row index, and "fullMatrix" (aka the original matrix input to rectExists1001).
-# We reference the original full matrix instead of the partial top matrix in the last step.
-# we also return an additional value: the augmented topMatrixAfterFlipMap
-def splitCaseHorizontal_nonSquareCase(rows, cols, topMatrix, bottomMatrix, previousTopMap, currentIndex, fullMatrix):
-    # Bottom matrix is where we look for (0, 1) pattern and
-    # top matrix is where we look for (1, 0)
-    topMatrixAfterFlip = flipMatrixOverBottomEdge(rows, cols, topMatrix)
-    # Add to existing top matrix column pair map
-    topMatrixAfterFlipMap = addToColumnPairMap(rows, cols, topMatrixAfterFlip, previousTopMap, currentIndex)
-    # Compute new bottom matrix column pair map
-    bottomMatrixMap = computeColumnPairMap(rows, cols, bottomMatrix)
-    # Compare top and bottom maps
-    for i in range(cols):
-        for j in range(i + 1, cols):
-            tRow = topMatrixAfterFlipMap[i][j]
-            bRow = bottomMatrixMap[i][j]
-            if tRow != -1 and bRow != -1 \
-              and fullMatrix[tRow][i] == 1 and fullMatrix[tRow][j] == 0 \
-              and bottomMatrix[bRow][i] == 0 and bottomMatrix[bRow][j] == 1:
-               return True, topMatrixAfterFlipMap
-    return False, topMatrixAfterFlipMap
 
 # Assumes that m > n
 def nonSquareCase(m, n, matrix):
@@ -249,9 +191,30 @@ def nonSquareCase(m, n, matrix):
         else:
             listOfSquareMatrices.append(squareMatrix)
     # Check horizontal split cases
-    topColumnPairMap = createMatrix(n, n)
-    for i in range(len(listOfSquareMatrices) - 1):
-        splitCaseFound, topColumnPairMap = splitCaseHorizontal_nonSquareCase(n, n, listOfSquareMatrices[i], listOfSquareMatrices[i+1], topColumnPairMap, i, matrix)
-        if splitCaseFound:
+    aggregateMap = createMatrix(n, n)
+    # For loop counting down from d - 1 to 0 (excluding 0)
+    for i in range(d - 1, 0, -1):
+        # Flip top matrix
+        topMatrixAfterFlip = flipMatrixOverBottomEdge(n, n, listOfSquareMatrices[i - 1])
+        # Compute column pair maps
+        topMatrixAfterFlipMap = computeColumnPairMap(n, n, topMatrixAfterFlip)
+        bottomMatrixMap = computeColumnPairMap(n, n, listOfSquareMatrices[i])
+        # Combine aggregate map with new bottom map
+        rowOffset = i * n
+        aggregateMap = combineColumnPairMaps(rowOffset, n, bottomMatrixMap, aggregateMap)
+        # Compare maps
+        if compareColumnPairMaps(n, topMatrixAfterFlip, topMatrixAfterFlipMap, matrix, aggregateMap):
             return True
     return False
+
+def combineColumnPairMaps(rowOffset, cols, firstMatrixMap, secondMatrixMap):
+    aggregateMap = createMatrix(cols, cols)
+    for i in range(cols):
+        for j in range(i + 1, cols):
+            firstRow = firstMatrixMap[i][j] # One n by n on top
+            secondRow = secondMatrixMap[i][j] # Many n by n's stacked below
+            if firstRow != -1:
+                aggregateMap[i][j] = firstRow + rowOffset
+            elif secondRow != -1:
+                aggregateMap[i][j] = secondRow
+    return aggregateMap
