@@ -13,8 +13,7 @@ from primary_implementation_case_1011 import rectExists1011
 # Case 1001
 from primary_implementation_case_1001 import rectExists1001
 
-
-# Run all nine test cases
+# Run all test cases
 for i in range(1, 28):
     m, n, testMatrix = MatrixReader.read('test_matrices/testMatrix' + str(i) + '.txt')
     result_1111 = rectExists(m, n, testMatrix)
