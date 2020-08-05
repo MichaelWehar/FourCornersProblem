@@ -10,7 +10,7 @@ import math
 
 # Creates an m by n matrix with all entries equal to the default value
 def createMatrix(rows, cols, defaultValue = -1):
-    return [[defaultValue for _ in range(int(cols))] for _ in range(int(rows))]
+    return [[defaultValue for _ in range(cols)] for _ in range(rows)]
 
 # Returns a new matrix that is the transpose of the original matrix
 def transposeMatrix(rows, cols, matrix):
@@ -71,7 +71,7 @@ def squareCase(cols, matrix):
         return False
 
     # cols / 2 will be a integer because cols is a power of 2
-    halfOfCols = int(cols / 2)
+    halfOfCols = int(float(cols) / 2)
 
     # Horizontal Split
     topMatrix = block(0, 0, halfOfCols, cols, matrix)
@@ -170,7 +170,7 @@ def compareColumnPairMaps(cols, firstMatrix, firstMatrixMap, secondMatrix, secon
 # Assumes that rows > cols
 def nonSquareCase(rows, cols, matrix):
     # Number of square matrices
-    d = int(math.ceil(rows / cols))
+    d = int(math.ceil(float(rows) / cols))
     # Create a list of square matrices and check if they contain the 1001 patten
     listOfSquareMatrices = []
     for i in range(d):
