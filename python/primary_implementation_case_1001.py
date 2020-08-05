@@ -44,9 +44,26 @@ def block(r, c, rows, cols, matrix):
                 blockMatrix[i][j] = 0
     return blockMatrix
 
-#################
-# (2) Algorithm #
-#################
+# Given an array "row" of length "cols" consisting of 0's and 1's and a set of
+# column indexes "columnSet", we split columnSet into two sets zeroSet, oneSet
+# zeroSet contains indexes with 0 in row
+# oneSet contains indexes with 1 in row
+def splitColumnSet(row, columnSet):
+    # initialize empty sets
+    zeroSet = set()
+    oneSet = set()
+    # iterate through indexes specified in columnSet
+    for i in columnSet:
+        # add indexes containing 0 to zeroSet and indexes containing 1 to oneSet
+        if row[i] == 0:
+            zeroSet.add(i)
+        elif row[i] == 1:
+            oneSet.add(i)
+    return zeroSet, oneSet
+
+##############################
+# (2) Algorithm: Square Case #
+##############################
 
 def rectExists1001(rows, cols, matrix):
     if rows < 2 or cols < 2: # Trivial case
@@ -91,22 +108,26 @@ def squareCase(cols, matrix):
         or splitCaseVertical(halfOfCols, halfOfCols, bottomLeftMatrix, bottomRightMatrix) \
         or splitCaseHorizontal(halfOfCols, cols, topMatrix, bottomMatrix)
 
-# Given an array "row" of length "cols" consisting of 0's and 1's and a set of
-# column indexes "columnSet", we split columnSet into two sets zeroSet, oneSet
-# zeroSet contains indexes with 0 in row
-# oneSet contains indexes with 1 in row
-def splitColumnSet(row, columnSet):
-    # initialize empty sets
-    zeroSet = set()
-    oneSet = set()
-    # iterate through indexes specified in columnSet
-    for i in columnSet:
-        # add indexes containing 0 to zeroSet and indexes containing 1 to oneSet
-        if row[i] == 0:
-            zeroSet.add(i)
-        elif row[i] == 1:
-            oneSet.add(i)
-    return zeroSet, oneSet
+# Transpose the top and bottom matrices so that they can be processed as if
+# the boundary between them was oriented horizontally
+def splitCaseVertical(rows, cols, leftMatrix, rightMatrix):
+    # Top matrix is where we look for (1, 0) and
+    # Bottom matrix is where we look for (0, 1) pattern
+    topMatrix = transposeMatrix(rows, cols, leftMatrix)
+    bottomMatrix = transposeMatrix(rows, cols, rightMatrix)
+    return splitCaseHorizontal(cols, rows, topMatrix, bottomMatrix)
+
+# Build up column pair maps of the row closest to the boundary where entries
+# differ, then iterate through and compare the maps
+def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
+    # Bottom matrix is where we look for (0, 1) pattern and
+    # top matrix is where we look for (1, 0)
+    topMatrixAfterFlip = flipMatrixOverBottomEdge(rows, cols, topMatrix)
+    # Compute column pair maps
+    topMatrixAfterFlipMap = computeColumnPairMap(rows, cols, topMatrixAfterFlip)
+    bottomMatrixMap = computeColumnPairMap(rows, cols, bottomMatrix)
+    # Compare top and bottom maps
+    return compareColumnPairMaps(cols, topMatrixAfterFlip, topMatrixAfterFlipMap, bottomMatrix, bottomMatrixMap)
 
 # Reads through the matrix from left to right, top to bottom
 # For each pair of columns, we identify the first row where they differ in value
@@ -135,27 +156,8 @@ def computeColumnPairMap(rows, cols, matrix):
         i += 1
     return columnPairMap
 
-# Transpose the top and bottom matrices so that they can be processed as if
-# the boundary between them was oriented horizontally
-def splitCaseVertical(rows, cols, leftMatrix, rightMatrix):
-    # Top matrix is where we look for (1, 0) and
-    # Bottom matrix is where we look for (0, 1) pattern
-    topMatrix = transposeMatrix(rows, cols, leftMatrix)
-    bottomMatrix = transposeMatrix(rows, cols, rightMatrix)
-    return splitCaseHorizontal(cols, rows, topMatrix, bottomMatrix)
-
-# Build up column pair maps of the row closest to the boundary where entries
-# differ, then iterate through and compare the maps
-def splitCaseHorizontal(rows, cols, topMatrix, bottomMatrix):
-    # Bottom matrix is where we look for (0, 1) pattern and
-    # top matrix is where we look for (1, 0)
-    topMatrixAfterFlip = flipMatrixOverBottomEdge(rows, cols, topMatrix)
-    # Compute column pair maps
-    topMatrixAfterFlipMap = computeColumnPairMap(rows, cols, topMatrixAfterFlip)
-    bottomMatrixMap = computeColumnPairMap(rows, cols, bottomMatrix)
-    # Compare top and bottom maps
-    return compareColumnPairMaps(cols, topMatrixAfterFlip, topMatrixAfterFlipMap, bottomMatrix, bottomMatrixMap)
-
+# For every pair of columns, checks whether firstMatrix contains (1, 0) pattern
+# and second matrix contains (0, 1) pattern
 def compareColumnPairMaps(cols, firstMatrix, firstMatrixMap, secondMatrix, secondMatrixMap):
     for i in range(cols):
         for j in range(i + 1, cols):
@@ -166,6 +168,10 @@ def compareColumnPairMaps(cols, firstMatrix, firstMatrixMap, secondMatrix, secon
               and secondMatrix[secondRow][i] == 0 and secondMatrix[secondRow][j] == 1:
                return True
     return False
+
+##################################
+# (3) Algorithm: Non-Square Case #
+##################################
 
 # Assumes that rows > cols
 def nonSquareCase(rows, cols, matrix):
@@ -196,12 +202,14 @@ def nonSquareCase(rows, cols, matrix):
             return True
     return False
 
+# Combines together the column pair maps from two different matrices
+# It prioritizes that values from the first matrix's map
 def combineColumnPairMaps(rowOffset, cols, firstMatrixMap, secondMatrixMap):
     aggregateMap = createMatrix(cols, cols)
     for i in range(cols):
         for j in range(i + 1, cols):
-            firstRow = firstMatrixMap[i][j] # One cols by cols on top
-            secondRow = secondMatrixMap[i][j] # Many cols by cols stacked below
+            firstRow = firstMatrixMap[i][j] # One cols by cols matrix on top
+            secondRow = secondMatrixMap[i][j] # Many cols by cols matrices stacked below
             if firstRow != -1:
                 aggregateMap[i][j] = firstRow + rowOffset
             elif secondRow != -1:
