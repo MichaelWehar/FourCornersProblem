@@ -9,12 +9,12 @@ import math
 ########################
 
 # Creates an m by n matrix with all entries equal to the default value
-def createMatrix(m, n, defaultValue = -1):
-    return [[defaultValue for _ in range(int(n))] for _ in range(int(m))]
+def createMatrix(rows, cols, defaultValue = -1):
+    return [[defaultValue for _ in range(int(cols))] for _ in range(int(rows))]
 
 # Returns a new matrix that is the transpose of the original matrix
 def transposeMatrix(rows, cols, matrix):
-    # Create an empty n by m matrix
+    # Create an empty cols by cols matrix
     transposedMatrix = createMatrix(cols, rows)
     for i in range(rows):
         for j in range(cols):
@@ -25,7 +25,7 @@ def transposeMatrix(rows, cols, matrix):
 # Returns a new matrix that is the reflection of the original matrix over
 # its bottom edge
 def flipMatrixOverBottomEdge(rows, cols, matrix):
-    # Create an empty n by m matrix
+    # Create an empty cols by cols matrix
     flippedMatrix = createMatrix(rows, cols)
     for i in range(rows):
         flippedMatrix[i] = matrix[rows - i - 1]
@@ -48,48 +48,48 @@ def block(r, c, rows, cols, matrix):
 # (2) Algorithm #
 #################
 
-def rectExists1001(m, n, matrix):
-    if m < 2 or n < 2: # Trivial case
+def rectExists1001(rows, cols, matrix):
+    if rows < 2 or cols < 2: # Trivial case
         return False
-    elif m == n:
-        # Find smallest power of two larger than n
-        k = int(math.ceil(math.log(n, 2)))
+    elif rows == cols:
+        # Find smallest power of two larger than cols
+        k = int(math.ceil(math.log(cols, 2)))
         l = int(math.pow(2, k))
         # Solve problem for square matrix with dummy
         # zero columns and rows appended to the end
         return squareCase(l, matrix)
-    elif m > n:
-        return nonSquareCase(m, n, matrix)
+    elif rows > cols:
+        return nonSquareCase(rows, cols, matrix)
     else:
-        transposedMatrix = transposeMatrix(m, n, matrix)
-        return nonSquareCase(n, m, transposedMatrix)
+        transposedMatrix = transposeMatrix(rows, cols, matrix)
+        return nonSquareCase(cols, rows, transposedMatrix)
 
-# Requires that n is a power of 2
-def squareCase(n, matrix):
+# Requires that cols is a power of 2
+def squareCase(cols, matrix):
     # Recursive base case
-    if n < 2:
+    if cols < 2:
         return False
 
-    # n / 2 will be a integer because n is a power of 2
-    halfOfN = int(n / 2)
+    # cols / 2 will be a integer because cols is a power of 2
+    halfOfCols = int(cols / 2)
 
     # Horizontal Split
-    topMatrix = block(0, 0, halfOfN, n, matrix)
-    bottomMatrix = block(halfOfN, 0, halfOfN, n, matrix)
+    topMatrix = block(0, 0, halfOfCols, cols, matrix)
+    bottomMatrix = block(halfOfCols, 0, halfOfCols, cols, matrix)
 
     # Top and Bottom Vertical Splits
-    topLeftMatrix = block(0, 0, halfOfN, halfOfN, topMatrix)
-    topRightMatrix = block(0, halfOfN, halfOfN, halfOfN, topMatrix)
-    bottomLeftMatrix = block(0, 0, halfOfN, halfOfN, bottomMatrix)
-    bottomRightMatrix = block(0, halfOfN, halfOfN, halfOfN, bottomMatrix)
+    topLeftMatrix = block(0, 0, halfOfCols, halfOfCols, topMatrix)
+    topRightMatrix = block(0, halfOfCols, halfOfCols, halfOfCols, topMatrix)
+    bottomLeftMatrix = block(0, 0, halfOfCols, halfOfCols, bottomMatrix)
+    bottomRightMatrix = block(0, halfOfCols, halfOfCols, halfOfCols, bottomMatrix)
 
     # Recursive step - 4 square cases and 3 split cases
     # def splitCase(rows, cols, topMatrix_beforeFlip, bottomMatrix_beforeFlip, boundaryOrientation):
-    return squareCase(halfOfN, topLeftMatrix) or squareCase(halfOfN, topRightMatrix) \
-        or squareCase(halfOfN, bottomLeftMatrix) or squareCase(halfOfN, bottomRightMatrix) \
-        or splitCaseVertical(halfOfN, halfOfN, topLeftMatrix, topRightMatrix) \
-        or splitCaseVertical(halfOfN, halfOfN, bottomLeftMatrix, bottomRightMatrix) \
-        or splitCaseHorizontal(halfOfN, n, topMatrix, bottomMatrix)
+    return squareCase(halfOfCols, topLeftMatrix) or squareCase(halfOfCols, topRightMatrix) \
+        or squareCase(halfOfCols, bottomLeftMatrix) or squareCase(halfOfCols, bottomRightMatrix) \
+        or splitCaseVertical(halfOfCols, halfOfCols, topLeftMatrix, topRightMatrix) \
+        or splitCaseVertical(halfOfCols, halfOfCols, bottomLeftMatrix, bottomRightMatrix) \
+        or splitCaseHorizontal(halfOfCols, cols, topMatrix, bottomMatrix)
 
 # Given an array "row" of length "cols" consisting of 0's and 1's and a set of
 # column indexes "columnSet", we split columnSet into two sets zeroSet, oneSet
@@ -167,32 +167,32 @@ def compareColumnPairMaps(cols, firstMatrix, firstMatrixMap, secondMatrix, secon
                return True
     return False
 
-# Assumes that m > n
-def nonSquareCase(m, n, matrix):
+# Assumes that rows > cols
+def nonSquareCase(rows, cols, matrix):
     # Number of square matrices
-    d = int(math.ceil(m / n))
+    d = int(math.ceil(rows / cols))
     # Create a list of square matrices and check if they contain the 1001 patten
     listOfSquareMatrices = []
     for i in range(d):
-        squareMatrix = block(i * n, 0, n, n, matrix)
-        if squareCase(n, squareMatrix):
+        squareMatrix = block(i * cols, 0, cols, cols, matrix)
+        if squareCase(cols, squareMatrix):
             return True
         else:
             listOfSquareMatrices.append(squareMatrix)
     # Check horizontal split cases
-    aggregateMap = createMatrix(n, n)
+    aggregateMap = createMatrix(cols, cols)
     # For loop counting down from d - 1 to 0 (excluding 0)
     for i in range(d - 1, 0, -1):
         # Flip top matrix
-        topMatrixAfterFlip = flipMatrixOverBottomEdge(n, n, listOfSquareMatrices[i - 1])
+        topMatrixAfterFlip = flipMatrixOverBottomEdge(cols, cols, listOfSquareMatrices[i - 1])
         # Compute column pair maps
-        topMatrixAfterFlipMap = computeColumnPairMap(n, n, topMatrixAfterFlip)
-        bottomMatrixMap = computeColumnPairMap(n, n, listOfSquareMatrices[i])
+        topMatrixAfterFlipMap = computeColumnPairMap(cols, cols, topMatrixAfterFlip)
+        bottomMatrixMap = computeColumnPairMap(cols, cols, listOfSquareMatrices[i])
         # Combine aggregate map with new bottom map
-        rowOffset = i * n
-        aggregateMap = combineColumnPairMaps(rowOffset, n, bottomMatrixMap, aggregateMap)
+        rowOffset = i * cols
+        aggregateMap = combineColumnPairMaps(rowOffset, cols, bottomMatrixMap, aggregateMap)
         # Compare maps
-        if compareColumnPairMaps(n, topMatrixAfterFlip, topMatrixAfterFlipMap, matrix, aggregateMap):
+        if compareColumnPairMaps(cols, topMatrixAfterFlip, topMatrixAfterFlipMap, matrix, aggregateMap):
             return True
     return False
 
@@ -200,8 +200,8 @@ def combineColumnPairMaps(rowOffset, cols, firstMatrixMap, secondMatrixMap):
     aggregateMap = createMatrix(cols, cols)
     for i in range(cols):
         for j in range(i + 1, cols):
-            firstRow = firstMatrixMap[i][j] # One n by n on top
-            secondRow = secondMatrixMap[i][j] # Many n by n's stacked below
+            firstRow = firstMatrixMap[i][j] # One cols by cols on top
+            secondRow = secondMatrixMap[i][j] # Many cols by cols stacked below
             if firstRow != -1:
                 aggregateMap[i][j] = firstRow + rowOffset
             elif secondRow != -1:
