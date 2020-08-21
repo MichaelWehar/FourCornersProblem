@@ -74,7 +74,7 @@ Since n <= m, this takes O(m \* n) time.
 
 - [2] D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
-**The problem is mentioned on the following coding websites**
+**The problem is discussed on the following coding websites**
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
