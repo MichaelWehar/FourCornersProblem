@@ -1,10 +1,8 @@
 # The Four Corners Problem
 
-The *four corners problem* is a 2D pattern matching problem that has frequently appeared in online coding challenges and on interview practice websites.
+The *four corners problem* is a 2D pattern matching problem that has frequently appeared in online coding challenges and on interview practice websites.  The *four corners problem* is decidable in O(n \* m) time.
 
 It is related to several well studied problems such as [frequent itemset mining](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.210.7727) and [4-cycle](https://www.sciencedirect.com/science/article/pii/S0304020808730196) as well as problems related to [computational geometry](http://dspace.library.uu.nl/handle/1874/16599).
-
-The *four corners problem* is decidable in O(n \* m) time.
 
 ## Problem Statement
 
