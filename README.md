@@ -1,16 +1,20 @@
 # The Four Corners Problem
 
-The *four corners problem* is decidable with its currectly best runtime known $O(n\*m)$.
+The *four corners problem* is a 2D pattern matching problem that has frequently appeared in online coding challenges and on interview practice websites.
+
+It is related to several well studied problems such as [frequent itemset mining](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.210.7727) and [4-cycle](https://www.sciencedirect.com/science/article/pii/S0304020808730196) as well as problems related to [computational geometry](http://dspace.library.uu.nl/handle/1874/16599).
+
+The *four corners problem* is decidable in O(n \* m) time.
 
 ## Problem Statement
 
 Input: A Boolean matrix M.
 
-[Decision Problem](https://en.wikipedia.org/wiki/Decision_problem): Does there exist a rectangle within M whose four corners are 1's?
+Question: Does there exist a rectangle within M whose four corners are 1's?
 
-Answer: yes / no
+Answer: True / False
 
-**Example Instance**: 5x8 matrix
+**Example Instance**: 5 x 8 matrix
 
 |          | *c1* | *c2* | *c3* | *c4* | *c5*  | *c6* | *c7* | *c8*  |
 | ---      | ---  | ---  | ---  | ---  | ---   | ---  | ---  | ---   |
@@ -24,7 +28,7 @@ Answer: yes / no
 
 Rows 2 & 4, Cols 5 & 8
 
-# Our Algorithm
+# Our Algorithm - Runtime O(n \* m)
 
 **Informal Explanation**
 
@@ -42,11 +46,11 @@ If we attempt to add a pair to the set that is already in the set, then we've fo
 
 Otherwise, if we reach the end, then there is no rectangle whose corners are 1's.
 
-**Runtime**
+**Runtime Analysis**
 
-This takes O(m\*n + n^2) time because we go through each of the m*n entries at most once and we go through each of the (n choose 2) = O(n^2) pairs of column indexes at most once before finding a rectangle whose corners are 1's.
+This takes O(m \* n + n^2) time because we go through each of the m*n entries at most once and we go through each of the (n choose 2) = O(n^2) pairs of column indexes at most once before finding a rectangle whose corners are 1's.
 
-Since n <= m, this takes O(m\*n) time.
+Since n <= m, this takes O(m \* n) time.
 
 # Code
 
@@ -56,19 +60,21 @@ Since n <= m, this takes O(m\*n) time.
 
 - Python code primary implementation by Ari Liloia and Michael Wehar (based on papers [1] and [2]).  Alternative implementation by Joseph Swernofsky.
 
+- Additional contributions by Yvo Meeres and Chen Xu.
+
 # License
 
 - MIT
 
 # Related Resources
 
-## Papers
+## The algorithm above is discussed in the following papers
 
 - [1] F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
 - [2] D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
-## Coding websites that mention this problem
+## The problem is mentioned on the following coding websites
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
