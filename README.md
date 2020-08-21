@@ -1,28 +1,28 @@
 # The Four Corners Problem
 
-**Problem Statement**
+The *four corners problem* is decidable with its currectly best runtime known $O(n\*m)$.
+
+## Problem Statement
 
 Input: A Boolean matrix M.
 
-Question: Does there exist a rectangle within M whose four corners are 1's?
+[Decision Problem](https://en.wikipedia.org/wiki/Decision_problem): Does there exist a rectangle within M whose four corners are 1's?
 
-**Example Instance**
+Answer: yes / no
 
-0	0	1	0	0	0	0	1
+**Example Instance**: 5x8 matrix
 
-1	0	0	0	***1***	1	0 ***1***
-
-0	0	1	0	0	1	0	0
-
-0	0	0	0	***1***	0	1	***1***
-
-0	0	1	0	0	0	1	1
+|          | *c1* | *c2* | *c3* | *c4* | *c5*  | *c6* | *c7* | *c8*  |
+| ---      | ---  | ---  | ---  | ---  | ---   | ---  | ---  | ---   |
+| ***r1*** | 0    | 0    | 1    | 0    | 0     | 0    | 0    | 1     |
+| ***r2*** | 1    | 0    | 0    | 0    | **1** | 1    | 0    | **1** |
+| ***r3*** | 0    | 0    | 1    | 0    | 0     | 1    | 0    | 0     |
+| ***r4*** | 0    | 0    | 0    | 0    | **1** | 0    | 1    | **1** |
+| ***r5*** | 0    | 0    | 1    | 0    | 0     | 0    | 1    | 1     |
 
 **Example Solution**
 
-Rows 2 & 4
-
-Cols 5 & 8
+Rows 2 & 4, Cols 5 & 8
 
 # Our Algorithm
 
@@ -57,17 +57,18 @@ Since n <= m, this takes O(m\*n) time.
 - Python code primary implementation by Ari Liloia and Michael Wehar (based on papers [1] and [2]).  Alternative implementation by Joseph Swernofsky.
 
 # License
+
 - MIT
 
 # Related Resources
 
-**Papers**
+## Papers
 
 - [1] F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
 - [2] D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
-**Coding websites that mention this problem**
+## Coding websites that mention this problem
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
