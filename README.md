@@ -68,13 +68,13 @@ Since n <= m, this takes O(m \* n) time.
 
 # Related Resources
 
-## The algorithm above is discussed in the following papers
+**The algorithm above is discussed in the following papers**
 
 - [1] F. Mráz, D. Prusa, and M. Wehar. Two-dimensional Pattern Matching against Basic Picture Languages. CIAA 2019.
 
 - [2] D. Prusa and M. Wehar. Complexity of Searching for 2 by 2 Submatrices in Boolean Matrices. DLT 2020.
 
-## The problem is mentioned on the following coding websites
+**The problem is mentioned on the following coding websites**
 
 - https://www.geeksforgeeks.org/find-rectangle-binary-matrix-corners-1/
 
