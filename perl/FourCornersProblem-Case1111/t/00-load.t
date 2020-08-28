@@ -3,6 +3,7 @@ use 5.006;
 use strict;
 use warnings;
 use Test::More;
+use lib "./lib";
 
 plan tests => 1;
 
