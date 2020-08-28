@@ -22,5 +22,12 @@ use FourCornersProblem::Case1111;
 
 use Test::More tests => 1;                      # last test to print
 
-my $matrix = slurp "../../python/test_matrices/testMatrix1.txt";
-ok(reverse("foobar") eq "raboof", "'foobar' rueckwaerts ist 'raboof'");
+my $matrixA = slurp "../../python/test_matrices/testMatrix1.txt";
+my $matrixB = "5 5
+1 0 0 0 1
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+1 0 0 0 1
+";
+ok($matrixB eq $matrixA, "Matrix read in as string and from file.");
