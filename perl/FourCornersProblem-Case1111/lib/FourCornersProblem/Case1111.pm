@@ -19,19 +19,11 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use FourCornersProblem::Case1111;
-
-    my $foo = FourCornersProblem::Case1111->new();
-    ...
+This module provides algorithms for the Four Corners Problem.
 
 =head1 EXPORT
 
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
+A list of the algorithms the module provides. TODO
 
 =head1 SUBROUTINES/METHODS
 
@@ -55,11 +47,7 @@ eevvoor, C<< <eevvoor at mailbox.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-fourcornersproblem-case1111 at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=FourCornersProblem-Case1111>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-
+Please report any bugs or feature requests to TODO github link
 
 
 =head1 SUPPORT
