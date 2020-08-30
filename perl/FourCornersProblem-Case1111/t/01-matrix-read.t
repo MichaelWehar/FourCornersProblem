@@ -18,11 +18,12 @@ use strict;
 use warnings;
 use Perl6::Slurp;
 use lib "./lib";
-use FourCornersProblem::Case1111;
+use FourCornersProblem::Case1111 qw( readMatrix );
 
-use Test::More tests => 1;                      # last test to print
+use Test::More tests => 2;                      # last test to print
 
 my $matrixA = slurp "../../python/test_matrices/testMatrix1.txt";
+# my $matrixC = readMatrix();
 my $matrixB = "5 5
 1 0 0 0 1
 0 0 0 0 0
@@ -31,3 +32,4 @@ my $matrixB = "5 5
 1 0 0 0 1
 ";
 ok($matrixB eq $matrixA, "Matrix read in as string and from file.");
+ok(FourCornersProblem::Case1111::readMatrix() eq $matrixA, "Matrix read in as string and from file via modules subroutine.");

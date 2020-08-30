@@ -4,6 +4,8 @@ use 5.006;
 use strict;
 use warnings;
 
+use Perl6::Slurp;
+
 =head1 NAME
 
 FourCornersProblem::Case1111 - The great new FourCornersProblem::Case1111!
@@ -27,11 +29,13 @@ A list of the algorithms the module provides. TODO
 
 =head1 SUBROUTINES/METHODS
 
-=head2 function1
+=head2 readMatrix
 
 =cut
 
-sub function1 {
+sub readMatrix {
+    my $matrix = slurp "../../python/test_matrices/testMatrix1.txt";
+    return $matrix;
 }
 
 =head2 function2
