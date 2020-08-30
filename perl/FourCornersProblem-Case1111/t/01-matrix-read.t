@@ -20,7 +20,7 @@ use Perl6::Slurp;
 use lib "./lib";
 use FourCornersProblem::Case1111 qw( readMatrix );
 
-use Test::More tests => 2;                      # last test to print
+use Test::More qw( no_plan);                      # last test to print
 
 my $matrixA = slurp "../../python/test_matrices/testMatrix1.txt";
 # my $matrixC = readMatrix();
