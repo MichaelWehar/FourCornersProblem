@@ -18,7 +18,7 @@ Version 0.01
 
 our $VERSION = '0.01';
 our $dimension;
-our @matrix = {};
+our @matrix;
 our $matrixFile = "../../python/test_matrices/testMatrix1.txt";
 
 =head1 SYNOPSIS
@@ -60,7 +60,6 @@ sub matrixFile2array {
 =cut
 
 sub getDimension {
-    &matrixFile2array;
     return $dimension;
 }
 
@@ -69,7 +68,6 @@ sub getDimension {
 =cut
 
 sub getMatrix {
-    &matrixFile2array;
     return @matrix;
 }
 
