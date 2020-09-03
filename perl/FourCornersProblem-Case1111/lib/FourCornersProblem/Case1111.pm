@@ -38,11 +38,17 @@ sub readMatrix {
     return $matrix;
 }
 
-=head2 function2
+=head2 matrixFile2array
 
 =cut
 
-sub function2 {
+sub matrixFile2array {
+    my @matrix = {};
+#   my $matrixFile = "../../python/test_matrices/testMatrix1.txt";
+#   open my $MATRIXFILE, '<', $matrixFile
+#       or die "Couldn't open $matrixFile2array: $OS_ERROR";
+#   my $dimension = <$MATRIXFILE>;
+    return @matrix;
 }
 
 =head1 AUTHOR

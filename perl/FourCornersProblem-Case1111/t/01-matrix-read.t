@@ -22,6 +22,7 @@ use FourCornersProblem::Case1111 qw( readMatrix );
 
 use Test::More qw( no_plan);                      # last test to print
 
+my $file =  "../../python/test_matrices/testMatrix1.txt";
 my $matrixA = slurp "../../python/test_matrices/testMatrix1.txt";
 # my $matrixC = readMatrix();
 my $matrixB = "5 5
@@ -33,3 +34,5 @@ my $matrixB = "5 5
 ";
 ok($matrixB eq $matrixA, "Matrix read in as string and from file.");
 ok(FourCornersProblem::Case1111::readMatrix() eq $matrixA, "Matrix read in as string and from file via modules subroutine.");
+
+# ok(FourCornersProblem::Case1111::matrixFile2array eq "5 5", "dimension")
