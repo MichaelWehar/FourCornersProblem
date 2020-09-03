@@ -44,11 +44,12 @@ sub readMatrix {
 
 sub matrixFile2array {
     my @matrix = {};
-#   my $matrixFile = "../../python/test_matrices/testMatrix1.txt";
-#   open my $MATRIXFILE, '<', $matrixFile
-#       or die "Couldn't open $matrixFile2array: $OS_ERROR";
-#   my $dimension = <$MATRIXFILE>;
-    return @matrix;
+    my $matrixFile = "../../python/test_matrices/testMatrix1.txt";
+    open my $MATRIXFILE, '<', $matrixFile
+        or die "Couldn't open $matrixFile";
+    my $dimension = <$MATRIXFILE>;
+    return $dimension;
+    # return @matrix;
 }
 
 =head1 AUTHOR

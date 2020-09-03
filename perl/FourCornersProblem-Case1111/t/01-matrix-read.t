@@ -35,4 +35,5 @@ my $matrixB = "5 5
 ok($matrixB eq $matrixA, "Matrix read in as string and from file.");
 ok(FourCornersProblem::Case1111::readMatrix() eq $matrixA, "Matrix read in as string and from file via modules subroutine.");
 
-# ok(FourCornersProblem::Case1111::matrixFile2array eq "5 5", "dimension")
+ok(FourCornersProblem::Case1111::matrixFile2array eq "5 5\n", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
+ok(FourCornersProblem::Case1111::matrixFile2array eq "5 5", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
