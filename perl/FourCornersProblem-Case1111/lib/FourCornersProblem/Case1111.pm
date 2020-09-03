@@ -17,7 +17,9 @@ Version 0.01
 =cut
 
 our $VERSION = '0.01';
-
+our $dimension;
+our @matrix = {};
+our $matrixFile = "../../python/test_matrices/testMatrix1.txt";
 
 =head1 SYNOPSIS
 
@@ -43,11 +45,11 @@ sub readMatrix {
 =cut
 
 sub matrixFile2array {
-    my @matrix = {};
-    my $matrixFile = "../../python/test_matrices/testMatrix1.txt";
     open my $MATRIXFILE, '<', $matrixFile
         or die "Couldn't open $matrixFile";
-    my $dimension = <$MATRIXFILE>; chomp $dimension;
+    $dimension = <$MATRIXFILE>; chomp $dimension;
+    @matrix = <$MATRIXFILE>;
+    print @matrix;
     return $dimension;
     # return @matrix;
 }
