@@ -48,10 +48,29 @@ sub matrixFile2array {
     open my $MATRIXFILE, '<', $matrixFile
         or die "Couldn't open $matrixFile";
     $dimension = <$MATRIXFILE>; chomp $dimension;
-    @matrix = <$MATRIXFILE>;
-    print @matrix;
+    while ( <$MATRIXFILE> ) {
+        chomp;
+	push @matrix, [ split ];
+    }
+    return @matrix;
+}
+
+=head2 getDimension
+
+=cut
+
+sub getDimension {
+    &matrixFile2array;
     return $dimension;
-    # return @matrix;
+}
+
+=head2 getMatrix
+
+=cut
+
+sub getMatrix {
+    &matrixFile2array;
+    return @matrix;
 }
 
 =head1 AUTHOR

@@ -19,6 +19,7 @@ use warnings;
 use Perl6::Slurp;
 use lib "./lib";
 use FourCornersProblem::Case1111 qw( readMatrix );
+use Data::Dumper qw(Dumper);
 
 use Test::More qw( no_plan);                      # last test to print
 
@@ -35,5 +36,7 @@ my $matrixB = "5 5
 ok($matrixB eq $matrixA, "Matrix read in as string and from file.");
 ok(FourCornersProblem::Case1111::readMatrix() eq $matrixA, "Matrix read in as string and from file via modules subroutine.");
 
-isnt(FourCornersProblem::Case1111::matrixFile2array, "5 5\n", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
-is(FourCornersProblem::Case1111::matrixFile2array, "5 5", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
+isnt(FourCornersProblem::Case1111::getDimension, "5 5\n", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
+is(FourCornersProblem::Case1111::getDimension, "5 5", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
+my @matrix = FourCornersProblem::Case1111::matrixFile2array;
+print Dumper \@matrix;
