@@ -13,10 +13,11 @@ def rectExists(m, n, matrix):
                 currentRow.append(j)
         # Efficiently traverse through pairs of column indexes with 1's (or true entries)
         # First, iterate over all possible entries containing 1 (or true)
-        for firstIndex in range(len(currentRow)):
+        numberOfOnes = len(currentRow)
+        for firstIndex in range(numberOfOnes - 1):
             firstElement = currentRow[firstIndex]
             # Next, iterate over all possible next entries containing 1 (or true)
-            for nextIndex in range(firstIndex + 1, len(currentRow)):
+            for nextIndex in range(firstIndex + 1, numberOfOnes):
                 nextElement = currentRow[nextIndex]
                 # print((firstElement * n) + nextElement)
                 # Encode a pair (firstElement, nextElement) as (firstElement * n) + nextElement
