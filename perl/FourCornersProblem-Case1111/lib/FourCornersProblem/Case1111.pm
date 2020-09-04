@@ -47,6 +47,7 @@ sub readMatrix {
 sub matrixFile2array {
     open my $MATRIXFILE, '<', $matrixFile
         or die "Couldn't open $matrixFile";
+    # TODO parse dimension to two ints
     $dimension = <$MATRIXFILE>; chomp $dimension;
     while ( <$MATRIXFILE> ) {
         chomp;
