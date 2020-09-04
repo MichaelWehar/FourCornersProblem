@@ -41,8 +41,9 @@ bool searchForRectangle(int rows, int cols, bool** mat){
     map<pair<int, int>, int> pairs;
     for (int i = 0; i < num_of_keys; i++) {
         vector<int> values = adjsList[i];
-        for (int j = 0; j < values.size(); j++) {
-            for (int k = j + 1; k < values.size(); k++) {
+        int size = values.size();
+        for (int j = 0; j < size - 1; j++) {
+            for (int k = j + 1; k < size; k++) {
                 pair<int, int> temp = make_pair(values[j], values[k]);
                 if (pairs.find(temp) != pairs.end()) {
                     // Prints rows followed by cols if row-wise
