@@ -23,8 +23,8 @@ use Data::Dumper qw(Dumper);
 
 use Test::More qw( no_plan);                      # last test to print
 
-my $file =  "../../python/test_matrices/testMatrix1.txt";
-my $matrixA = slurp "../../python/test_matrices/testMatrix1.txt";
+my $file =  "../python/test_matrices/testMatrix1.txt";
+my $matrixA = slurp $file;
 # my $matrixC = readMatrix();
 my $matrixB = "5 5
 1 0 0 0 1

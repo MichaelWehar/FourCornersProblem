@@ -19,7 +19,7 @@ Version 0.01
 our $VERSION = '0.01';
 our $dimension;
 our @matrix;
-our $matrixFile = "../../python/test_matrices/testMatrix1.txt";
+our $matrixFile = "../python/test_matrices/testMatrix1.txt";
 
 =head1 SYNOPSIS
 
@@ -36,7 +36,7 @@ A list of the algorithms the module provides. TODO
 =cut
 
 sub readMatrix {
-    my $matrix = slurp "../../python/test_matrices/testMatrix1.txt";
+    my $matrix = slurp "../python/test_matrices/testMatrix1.txt";
     return $matrix;
 }
 
