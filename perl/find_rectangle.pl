@@ -43,8 +43,10 @@ print Dumper \@matrix;
 	}
         # Efficiently traverse through pairs of column indexes with 1's (or true entries)
         # First, iterate over all possible entries containing 1 (or true)
-	foreach (@currentRow) {
-	    my $firstElement; my $nextElement;
+	foreach (@currentRow) { # TODO call last at second last element
+	    my $firstElement = $_;
+	    my $nextElement;
+	    
                 # Encode a pair (firstElement, nextElement) as (firstElement * n) + nextElement
 		
         }
