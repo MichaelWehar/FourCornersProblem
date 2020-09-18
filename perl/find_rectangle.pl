@@ -29,27 +29,31 @@ use FourCornersProblem::Case1111 qw( readMatrix );
 
 sub rectExists {
 
+    my $n = 5;
     my @matrix = FourCornersProblem::Case1111::matrixFile2array;
 print Dumper \@matrix;
 
     # Traverse through the matrix row by row
     for my $i (0..$#matrix) {
     # This set will store pairs of column indexes
-    my @columnPairs;
+    my %columnPairs;
         # Traverse through current row's elements to find all 1's (or true entries)
         my @currentRow;
-        for my $j (0..4) {
+        for my $j (0..$n-1) {
 	    if ($matrix[$i][$j]) { push @currentRow, $j };
 	}
         # Efficiently traverse through pairs of column indexes with 1's (or true entries)
         # First, iterate over all possible entries containing 1 (or true)
 	for my $firstIndex (0..$#currentRow-1) { # TODO call last at second last element
-	    my $firstElement = $currentRow[$firstIndex];
-	    print $firstElement;
-	    my $nextElement;
-	    
+	    my $firstElement = $currentRow[$firstIndex]; # print $firstElement;
+            # Next, iterate over all possible next entries containing 1 (or true)
+	    for my $nextIndex ($firstIndex+1..$#currentRow){ 
+	        my $nextElement = $currentRow[$nextIndex];
                 # Encode a pair (firstElement, nextElement) as (firstElement * n) + nextElement
-		
+		my $currentPair = ($firstElement * $n) + $nextElement;
+		return if exists $columnPairs{$currentPair};
+                $columnPairs{$currentPair} = '';
+	    }
         }
     }
     return;
