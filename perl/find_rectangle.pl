@@ -34,9 +34,9 @@ sub rectExists {
 print Dumper \@matrix;
 
     # Traverse through the matrix row by row
-    for my $i (0..$#matrix) {
-    # This set will store pairs of column indexes
-    my %columnPairs;
+    for my $i (0..$#matrix) {   # loop through matrix' rows
+        # This set will store pairs of column indexes
+        my %columnPairs;
         # Traverse through current row's elements to find all 1's (or true entries)
         my @currentRow;
         for my $j (0..$n-1) {
@@ -52,7 +52,7 @@ print Dumper \@matrix;
                 # Encode a pair (firstElement, nextElement) as (firstElement * n) + nextElement
 		my $currentPair = ($firstElement * $n) + $nextElement;
 		return if exists $columnPairs{$currentPair};
-                $columnPairs{$currentPair} = '';
+                $columnPairs{$currentPair} = 1; # save it in a hash since you cannot grep through perl arrays 
 	    }
         }
     }
