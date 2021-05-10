@@ -24,12 +24,12 @@ use utf8;
 
 use Data::Dumper qw(Dumper);
 
-use FourCornersProblem::Case1111 qw( readMatrix );
+use FourCornersProblem::MatrixInput qw( readMatrix );
 
 sub rectExists {
 
     my $n = 5;
-    my @matrix = FourCornersProblem::Case1111::matrixFile2array;
+    my @matrix = FourCornersProblem::MatrixInput::matrixFile2array;
 # print Dumper \@matrix;
 
     # Traverse through the matrix row by row
