@@ -1,4 +1,4 @@
-# This Makefile is for the FourCornersProblem::Case1111 extension to perl.
+# This Makefile is for the FourCornersProblem::MatrixInput extension to perl.
 #
 # It was generated automatically by MakeMaker version
 # 7.34 (Revision: 73400) from the contents of
@@ -11,17 +11,17 @@
 
 #   MakeMaker Parameters:
 
-#     ABSTRACT_FROM => q[lib/FourCornersProblem/Case1111.pm]
+#     ABSTRACT_FROM => q[lib/FourCornersProblem/MatrixInput.pm]
 #     AUTHOR => [q[eevvoor <eevvoor@mailbox.org>]]
 #     BUILD_REQUIRES => {  }
 #     CONFIGURE_REQUIRES => { ExtUtils::MakeMaker=>q[0] }
 #     LICENSE => q[artistic_2]
 #     MIN_PERL_VERSION => q[5.006]
-#     NAME => q[FourCornersProblem::Case1111]
+#     NAME => q[FourCornersProblem::MatrixInput]
 #     PREREQ_PM => { Test::More=>q[0] }
 #     TEST_REQUIRES => { Test::More=>q[0] }
-#     VERSION_FROM => q[lib/FourCornersProblem/Case1111.pm]
-#     clean => { FILES=>q[FourCornersProblem-Case1111-*] }
+#     VERSION_FROM => q[lib/FourCornersProblem/MatrixInput.pm]
+#     clean => { FILES=>q[FourCornersProblem-MatrixInput-*] }
 #     dist => { COMPRESS=>q[gzip -9f], SUFFIX=>q[gz] }
 
 # --- MakeMaker post_initialize section:
@@ -59,8 +59,8 @@ VENDORLIBEXP = /usr/share/perl5
 AR_STATIC_ARGS = cr
 DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
-NAME = FourCornersProblem::Case1111
-NAME_SYM = FourCornersProblem_Case1111
+NAME = FourCornersProblem::MatrixInput
+NAME_SYM = FourCornersProblem_MatrixInput
 VERSION = 0.01
 VERSION_MACRO = VERSION
 VERSION_SYM = 0_01
@@ -151,11 +151,11 @@ MM_REVISION = 73400
 # PARENT_NAME = NAME without BASEEXT and no trailing :: (eg Foo::Bar)
 # DLBASE  = Basename part of dynamic library. May be just equal BASEEXT.
 MAKE = make
-FULLEXT = FourCornersProblem/Case1111
-BASEEXT = Case1111
+FULLEXT = FourCornersProblem/MatrixInput
+BASEEXT = MatrixInput
 PARENT_NAME = FourCornersProblem
 DLBASE = $(BASEEXT)
-VERSION_FROM = lib/FourCornersProblem/Case1111.pm
+VERSION_FROM = lib/FourCornersProblem/MatrixInput.pm
 OBJECT = 
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -167,7 +167,7 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = lib/FourCornersProblem/Case1111.pm
+MAN3PODS = lib/FourCornersProblem/MatrixInput.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
@@ -190,7 +190,7 @@ PERL_ARCHIVEDEP    =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/FourCornersProblem/Case1111.pm
+TO_INST_PM = lib/FourCornersProblem/MatrixInput.pm
 
 
 # --- MakeMaker platform_constants section:
@@ -259,8 +259,8 @@ CI = ci -u
 RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
-DISTNAME = FourCornersProblem-Case1111
-DISTVNAME = FourCornersProblem-Case1111-0.01
+DISTNAME = FourCornersProblem-MatrixInput
+DISTVNAME = FourCornersProblem-MatrixInput-0.01
 
 
 # --- MakeMaker macro section:
@@ -417,9 +417,9 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all config  \
-	lib/FourCornersProblem/Case1111.pm
+	lib/FourCornersProblem/MatrixInput.pm
 	$(NOECHO) $(POD2MAN) --section=$(MAN3EXT) --perm_rw=$(PERM_RW) -u \
-	  lib/FourCornersProblem/Case1111.pm $(INST_MAN3DIR)/FourCornersProblem::Case1111.$(MAN3EXT) 
+	  lib/FourCornersProblem/MatrixInput.pm $(INST_MAN3DIR)/FourCornersProblem::MatrixInput.$(MAN3EXT) 
 
 
 
@@ -463,7 +463,7 @@ clean :: clean_subdirs
 	  pm_to_blib.ts so_locations \
 	  tmon.out 
 	- $(RM_RF) \
-	  FourCornersProblem-Case1111-* blib 
+	  FourCornersProblem-MatrixInput-* blib 
 	  $(NOECHO) $(RM_F) $(MAKEFILE_OLD)
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
 
@@ -487,7 +487,7 @@ realclean purge :: realclean_subdirs
 metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '---' > META_new.yml
-	$(NOECHO) $(ECHO) 'abstract: '\''The great new FourCornersProblem::Case1111!'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'abstract: '\''The great new FourCornersProblem::MatrixInput!'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  - '\''eevvoor <eevvoor@mailbox.org>'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'build_requires:' >> META_new.yml
@@ -501,7 +501,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'meta-spec:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  url: http://module-build.sourceforge.net/META-spec-v1.4.html' >> META_new.yml
 	$(NOECHO) $(ECHO) '  version: '\''1.4'\''' >> META_new.yml
-	$(NOECHO) $(ECHO) 'name: FourCornersProblem-Case1111' >> META_new.yml
+	$(NOECHO) $(ECHO) 'name: FourCornersProblem-MatrixInput' >> META_new.yml
 	$(NOECHO) $(ECHO) 'no_index:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  directory:' >> META_new.yml
 	$(NOECHO) $(ECHO) '    - t' >> META_new.yml
@@ -513,7 +513,7 @@ metafile : create_distdir
 	-$(NOECHO) $(MV) META_new.yml $(DISTVNAME)/META.yml
 	$(NOECHO) $(ECHO) Generating META.json
 	$(NOECHO) $(ECHO) '{' > META_new.json
-	$(NOECHO) $(ECHO) '   "abstract" : "The great new FourCornersProblem::Case1111!",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "abstract" : "The great new FourCornersProblem::MatrixInput!",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "author" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '      "eevvoor <eevvoor@mailbox.org>"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
@@ -526,7 +526,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",' >> META_new.json
 	$(NOECHO) $(ECHO) '      "version" : 2' >> META_new.json
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
-	$(NOECHO) $(ECHO) '   "name" : "FourCornersProblem-Case1111",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "name" : "FourCornersProblem-MatrixInput",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "no_index" : {' >> META_new.json
 	$(NOECHO) $(ECHO) '      "directory" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '         "t",' >> META_new.json
@@ -842,22 +842,22 @@ testdb_static :: static pure_all
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="FourCornersProblem-Case1111" VERSION="0.01">' > FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT>The great new FourCornersProblem::Case1111!</ABSTRACT>' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '    <AUTHOR>eevvoor &lt;eevvoor@mailbox.org&gt;</AUTHOR>' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '        <PERLCORE VERSION="5,006,0,0" />' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.30" />' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> FourCornersProblem-Case1111.ppd
-	$(NOECHO) $(ECHO) '</SOFTPKG>' >> FourCornersProblem-Case1111.ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="FourCornersProblem-MatrixInput" VERSION="0.01">' > FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '    <ABSTRACT>The great new FourCornersProblem::MatrixInput!</ABSTRACT>' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '    <AUTHOR>eevvoor &lt;eevvoor@mailbox.org&gt;</AUTHOR>' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '        <PERLCORE VERSION="5,006,0,0" />' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.30" />' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> FourCornersProblem-MatrixInput.ppd
+	$(NOECHO) $(ECHO) '</SOFTPKG>' >> FourCornersProblem-MatrixInput.ppd
 
 
 # --- MakeMaker pm_to_blib section:
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
-	  'lib/FourCornersProblem/Case1111.pm' 'blib/lib/FourCornersProblem/Case1111.pm' 
+	  'lib/FourCornersProblem/MatrixInput.pm' 'blib/lib/FourCornersProblem/MatrixInput.pm' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 

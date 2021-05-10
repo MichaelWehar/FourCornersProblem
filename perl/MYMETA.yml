@@ -1,5 +1,5 @@
 ---
-abstract: 'The great new FourCornersProblem::Case1111!'
+abstract: 'The great new FourCornersProblem::MatrixInput!'
 author:
   - 'eevvoor <eevvoor@mailbox.org>'
 build_requires:
@@ -13,7 +13,7 @@ license: artistic_2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
-name: FourCornersProblem-Case1111
+name: FourCornersProblem-MatrixInput
 no_index:
   directory:
     - t

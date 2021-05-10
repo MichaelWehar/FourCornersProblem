@@ -1,5 +1,5 @@
 {
-   "abstract" : "The great new FourCornersProblem::Case1111!",
+   "abstract" : "The great new FourCornersProblem::MatrixInput!",
    "author" : [
       "eevvoor <eevvoor@mailbox.org>"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : 2
    },
-   "name" : "FourCornersProblem-Case1111",
+   "name" : "FourCornersProblem-MatrixInput",
    "no_index" : {
       "directory" : [
          "t",

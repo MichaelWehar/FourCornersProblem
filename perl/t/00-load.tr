@@ -8,7 +8,7 @@ use lib "./lib";
 plan tests => 1;
 
 BEGIN {
-    use_ok( 'FourCornersProblem::Case1111' ) || print "Bail out!\n";
+    use_ok( 'FourCornersProblem::MatrixInput' ) || print "Bail out!\n";
 }
 
-diag( "Testing FourCornersProblem::Case1111 $FourCornersProblem::Case1111::VERSION, Perl $], $^X" );
+diag( "Testing FourCornersProblem::MatrixInput $FourCornersProblem::MatrixInput::VERSION, Perl $], $^X" );

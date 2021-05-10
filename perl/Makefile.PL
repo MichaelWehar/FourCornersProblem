@@ -4,10 +4,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-    NAME             => 'FourCornersProblem::Case1111',
+    NAME             => 'FourCornersProblem::MatrixInput',
     AUTHOR           => q{eevvoor <eevvoor@mailbox.org>},
-    VERSION_FROM     => 'lib/FourCornersProblem/Case1111.pm',
-    ABSTRACT_FROM    => 'lib/FourCornersProblem/Case1111.pm',
+    VERSION_FROM     => 'lib/FourCornersProblem/MatrixInput.pm',
+    ABSTRACT_FROM    => 'lib/FourCornersProblem/MatrixInput.pm',
     LICENSE          => 'artistic_2',
     MIN_PERL_VERSION => '5.006',
     CONFIGURE_REQUIRES => {
@@ -21,7 +21,7 @@ my %WriteMakefileArgs = (
         #'Foo::Bar::Module' => '5.0401',
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'FourCornersProblem-Case1111-*' },
+    clean => { FILES => 'FourCornersProblem-MatrixInput-*' },
 );
 
 # Compatibility with old versions of ExtUtils::MakeMaker

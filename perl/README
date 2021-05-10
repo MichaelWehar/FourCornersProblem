@@ -1,4 +1,4 @@
-FourCornersProblem-Case1111
+FourCornersProblem-MatrixInput
 
 The README is used to introduce the module and provide instructions on
 how to install the module, any machine dependencies it may have (for
@@ -26,21 +26,21 @@ SUPPORT AND DOCUMENTATION
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc FourCornersProblem::Case1111
+    perldoc FourCornersProblem::MatrixInput
 
 You can also look for information at:
 
     RT, CPAN's request tracker (report bugs here)
-        https://rt.cpan.org/NoAuth/Bugs.html?Dist=FourCornersProblem-Case1111
+        https://rt.cpan.org/NoAuth/Bugs.html?Dist=FourCornersProblem-MatrixInput
 
     AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/FourCornersProblem-Case1111
+        http://annocpan.org/dist/FourCornersProblem-MatrixInput
 
     CPAN Ratings
-        https://cpanratings.perl.org/d/FourCornersProblem-Case1111
+        https://cpanratings.perl.org/d/FourCornersProblem-MatrixInput
 
     Search CPAN
-        https://metacpan.org/release/FourCornersProblem-Case1111
+        https://metacpan.org/release/FourCornersProblem-MatrixInput
 
 
 LICENSE AND COPYRIGHT

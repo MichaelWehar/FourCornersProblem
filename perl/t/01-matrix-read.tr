@@ -18,7 +18,7 @@ use strict;
 use warnings;
 use Perl6::Slurp;
 use lib "./lib";
-use FourCornersProblem::Case1111 qw( readMatrix );
+use FourCornersProblem::MatrixInput qw( readMatrix );
 use Data::Dumper qw(Dumper);
 
 use Test::More qw( no_plan);                      # last test to print
@@ -33,11 +33,11 @@ my $matrixB = "5 5
 0 0 0 0 0
 1 0 0 0 1
 ";
-my @matrix = FourCornersProblem::Case1111::matrixFile2array;
+my @matrix = FourCornersProblem::MatrixInput::matrixFile2array;
 ok($matrixB eq $matrixA, "Matrix read in as string and from file.");
-ok(FourCornersProblem::Case1111::readMatrix() eq $matrixA, "Matrix read in as string and from file via modules subroutine.");
+ok(FourCornersProblem::MatrixInput::readMatrix() eq $matrixA, "Matrix read in as string and from file via modules subroutine.");
 
-isnt(FourCornersProblem::Case1111::getDimension, "5 5\n", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
-is(FourCornersProblem::Case1111::getDimension, "5 5", "dimension:" . FourCornersProblem::Case1111::matrixFile2array);
+isnt(FourCornersProblem::MatrixInput::getDimension, "5 5\n", "dimension:" . FourCornersProblem::MatrixInput::matrixFile2array);
+is(FourCornersProblem::MatrixInput::getDimension, "5 5", "dimension:" . FourCornersProblem::MatrixInput::matrixFile2array);
 print Dumper \@matrix;
 is($matrix[4][4], 1, "test one matrix entry")
