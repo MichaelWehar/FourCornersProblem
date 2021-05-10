@@ -31,7 +31,7 @@ sub rectExists {
 
     my $n = 5;
     my @matrix = FourCornersProblem::Case1111::matrixFile2array;
-print Dumper \@matrix;
+# print Dumper \@matrix;
 
     # Traverse through the matrix row by row
     for my $i (0..$#matrix) {   # loop through matrix' rows

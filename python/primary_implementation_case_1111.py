@@ -1,6 +1,9 @@
 # Created on 5/21/20
 # Author: Ari Liloia and Michael Wehar
 
+# m - row    - y
+# n - column - x
+
 def rectExists(m, n, matrix):
     # This set will store pairs of column indexes
     columnPairs = set()
