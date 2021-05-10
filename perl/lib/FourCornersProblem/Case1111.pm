@@ -1,4 +1,4 @@
-package FourCornersProblem::Case1111;
+package FourCornersProblem::MatrixInput;
 
 use 5.006;
 use strict;
@@ -8,7 +8,7 @@ use Perl6::Slurp;
 
 =head1 NAME
 
-FourCornersProblem::Case1111 - The great new FourCornersProblem::Case1111!
+FourCornersProblem::MatrixInput - The great new FourCornersProblem::MatrixInput!
 
 =head1 VERSION
 
@@ -85,7 +85,7 @@ Please report any bugs or feature requests to TODO github link
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc FourCornersProblem::Case1111
+    perldoc FourCornersProblem::MatrixInput
 
 
 You can also look for information at:
@@ -94,19 +94,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=FourCornersProblem-Case1111>
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=FourCornersProblem-MatrixInput>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/FourCornersProblem-Case1111>
+L<http://annocpan.org/dist/FourCornersProblem-MatrixInput>
 
 =item * CPAN Ratings
 
-L<https://cpanratings.perl.org/d/FourCornersProblem-Case1111>
+L<https://cpanratings.perl.org/d/FourCornersProblem-MatrixInput>
 
 =item * Search CPAN
 
-L<https://metacpan.org/release/FourCornersProblem-Case1111>
+L<https://metacpan.org/release/FourCornersProblem-MatrixInput>
 
 =back
 
@@ -125,4 +125,4 @@ This is free software, licensed under:
 
 =cut
 
-1; # End of FourCornersProblem::Case1111
+1; # End of FourCornersProblem::MatrixInput

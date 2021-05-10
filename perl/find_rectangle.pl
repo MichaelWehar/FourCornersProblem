@@ -24,7 +24,6 @@ use utf8;
 
 use Data::Dumper qw(Dumper);
 
-use lib "./lib";
 use FourCornersProblem::Case1111 qw( readMatrix );
 
 sub rectExists {
