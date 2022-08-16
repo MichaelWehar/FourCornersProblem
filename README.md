@@ -79,3 +79,5 @@ Since n <= m, this takes O(m \* n) time.
 - https://www.tutorialspoint.com/find-if-there-is-a-rectangle-in-binary-matrix-with-corners-as-1-in-cplusplus
 
 - https://www.interviewbit.com/problems/find-rectangle-in-binary-matrix/
+
+- https://www.scaler.com/topics/matrix-multiplication-in-python/
